@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Segundo Cérebro | Executive Core</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,25 +18,23 @@
                             600: '#374151',
                         },
                         brand: {
-                            primary: '#6366F1',
-                            accent: '#10B981',
+                            primary: '#059669', // Verde Bandeira Sólido
+                            light: '#10B981',
+                            dark: '#047857',
+                            accent: '#34D399',
                             warning: '#F59E0B',
-                            danger: '#EF4444',
-                            glow: 'rgba(99, 102, 241, 0.15)'
+                            danger: '#EF4444'
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .glow-effect { box-shadow: 0 0 25px rgba(99, 102, 241, 0.2); }
+        .glass-card { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #0B0F19; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
@@ -52,7 +49,7 @@
             <!-- Logo & User Profile -->
             <div class="p-6 border-b border-gray-800">
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-primary to-indigo-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-primary to-brand-accent flex items-center justify-center shadow-lg shadow-emerald-500/20">
                         <i class="fa-solid fa-brain text-white text-lg"></i>
                     </div>
                     <div>
@@ -65,24 +62,24 @@
                 <!-- Gamification Status Bar -->
                 <div class="bg-dark-700/60 rounded-xl p-3 border border-gray-700/50">
                     <div class="flex justify-between text-xs mb-1">
-                        <span class="text-gray-400 font-medium">Nível <span id="user-level" class="text-white font-bold">3</span> (Core Executive)</span>
-                        <span id="user-xp" class="text-brand-primary font-bold">1.450 / 2.000 XP</span>
+                        <span class="text-gray-400 font-medium">Nível <span id="user-level" class="text-white font-bold">3</span> (Executor Sênior)</span>
+                        <span id="user-xp" class="text-brand-accent font-bold">1.450 / 2.000 XP</span>
                     </div>
-                    <div class="w-full bg-dark-900 rounded-full h-2 overflow-hidden">
-                        <div id="xp-bar" class="bg-gradient-to-r from-brand-primary to-emerald-400 h-2 rounded-full transition-all duration-500" style="width: 72%;"></div>
+                    <div class="w-full bg-dark-900 rounded-full h-2.5 overflow-hidden">
+                        <div id="xp-bar" class="bg-gradient-to-r from-brand-primary to-brand-accent h-2.5 rounded-full transition-all duration-500" style="width: 72%;"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Navigation Links -->
             <nav class="p-4 space-y-1.5" id="nav-tabs">
-                <button onclick="switchTab('dashboard')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all bg-brand-primary text-white shadow-lg shadow-brand-primary/20" data-target="dashboard">
+                <button onclick="switchTab('dashboard')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all bg-brand-primary text-white shadow-lg shadow-emerald-500/20" data-target="dashboard">
                     <i class="fa-solid fa-chart-pie w-5 text-center"></i>
-                    <span>Dashboard & Circadiano</span>
+                    <span>Dashboard Principal</span>
                 </button>
-                <button onclick="switchTab('ia-chat')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="ia-chat">
-                    <i class="fa-solid fa-wand-magic-sparkles w-5 text-center text-indigo-400"></i>
-                    <span>Agente & Leitor de Fotos</span>
+                <button onclick="switchTab('tarefas')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="tarefas">
+                    <i class="fa-solid fa-list-check w-5 text-center"></i>
+                    <span>Tarefas (Kanban)</span>
                 </button>
                 <button onclick="switchTab('rotina')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="rotina">
                     <i class="fa-solid fa-sun w-5 text-center"></i>
@@ -104,21 +101,24 @@
                     <i class="fa-solid fa-dumbbell w-5 text-center"></i>
                     <span>Treino (ARMS Gym)</span>
                 </button>
+                <button onclick="switchTab('despejo')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="despejo">
+                    <i class="fa-solid fa-book-open w-5 text-center"></i>
+                    <span>Despejo / Diário</span>
+                </button>
                 <button onclick="switchTab('crescimento')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="crescimento">
                     <i class="fa-solid fa-compass w-5 text-center"></i>
-                    <span>Crescimento & Roda da Vida</span>
+                    <span>Roda da Vida</span>
                 </button>
             </nav>
         </div>
 
-        <!-- Sidebar Footer / Notification Trigger -->
         <div class="p-4 border-t border-gray-800">
             <button onclick="requestNotificationPermission()" class="w-full bg-dark-700 hover:bg-dark-600 text-gray-300 text-xs font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center space-x-2 border border-gray-700">
-                <i class="fa-solid fa-bell text-brand-primary"></i>
-                <span>Ativar Notificações Push</span>
+                <i class="fa-solid fa-bell text-brand-light"></i>
+                <span>Ativar Notificações</span>
             </button>
             <div class="mt-3 text-center text-[10px] text-gray-500">
-                Plassô Executive Core • v2.0 AI
+                Plassô Executive Core • v3.0
             </div>
         </div>
     </aside>
@@ -129,174 +129,196 @@
         <!-- TOP HEADER BAR -->
         <header class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
             <div>
-                <h2 id="page-title" class="text-2xl font-extrabold text-white tracking-tight">Dashboard & Ciclo Circadiano</h2>
-                <p id="page-subtitle" class="text-sm text-gray-400 mt-0.5">Visão geral do seu estado cognitivo, bio-ritmo e tarefas críticas do dia.</p>
+                <h2 id="page-title" class="text-2xl font-extrabold text-white tracking-tight">Dashboard Principal</h2>
+                <p id="page-subtitle" class="text-sm text-gray-400 mt-0.5">Visão geral do seu estado cognitivo, bio-ritmo e metas diárias.</p>
             </div>
             <div class="flex items-center space-x-4">
                 <div class="glass-card px-4 py-2 rounded-xl flex items-center space-x-3">
-                    <i class="fa-solid fa-clock text-brand-primary"></i>
+                    <i class="fa-solid fa-clock text-brand-light"></i>
                     <span id="live-clock" class="text-sm font-bold text-gray-200">00:00:00</span>
                 </div>
-                <button onclick="switchTab('ia-chat')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2.5 rounded-xl text-sm shadow-lg shadow-indigo-500/25 transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>Abrir Chat IA</span>
+                <button onclick="switchTab('despejo')" class="bg-brand-primary hover:bg-brand-dark text-white font-semibold px-4 py-2.5 rounded-xl text-sm shadow-lg shadow-emerald-500/20 transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-pen-nib"></i>
+                    <span>Escrever Diário</span>
                 </button>
             </div>
         </header>
 
         <!-- ================= TABS CONTAINER ================= -->
 
-        <!-- TAB 1: DASHBOARD & CIRCADIANO -->
+        <!-- TAB 1: DASHBOARD PRINCIPAL -->
         <div id="tab-dashboard" class="tab-content space-y-6">
-            <div class="glass-card rounded-2xl p-6 relative overflow-hidden border border-indigo-500/20">
-                <div class="absolute right-0 top-0 translate-x-6 -translate-y-6 w-48 h-48 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <!-- Planta Gamificada & Metas Diárias -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Planta / Ecossistema Gamificado -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center text-center relative overflow-hidden border border-emerald-500/20">
+                    <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent pointer-events-none"></div>
+                    <div class="w-20 h-20 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-3xl text-brand-light mb-3 shadow-lg shadow-emerald-500/10" id="plant-icon-container">
+                        <i id="plant-icon" class="fa-solid fa-seedling transition-all duration-500"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Planta do Dia (<span id="plant-stage">Crescendo</span>)</h3>
+                    <p class="text-xs text-gray-400 mb-4">Adube com hábitos saudáveis ou reduza com o veneno da procrastinação.</p>
+                    <div class="w-full bg-dark-900 rounded-full h-2 mb-4 overflow-hidden border border-gray-800">
+                        <div id="plant-growth-bar" class="bg-gradient-to-r from-brand-primary to-brand-light h-2 rounded-full transition-all duration-500" style="width: 60%;"></div>
+                    </div>
+                    <div class="flex gap-2 w-full">
+                        <button onclick="feedPlant('fertilizer')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-all shadow-md shadow-emerald-600/20">
+                            <i class="fa-solid fa-droplet mr-1"></i> Fertilizante (+XP)
+                        </button>
+                        <button onclick="feedPlant('poison')" class="flex-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition-all">
+                            <i class="fa-solid fa-skull mr-1"></i> Veneno (-Tam)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Metas do Dia (Água & Alimentação) -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-primary/15 text-brand-primary text-xs font-bold mb-3">
-                            <i class="fa-solid fa-circle-nodes"></i>
-                            <span>Pico de Alta Performance Cognitiva</span>
+                        <h3 class="text-base font-bold text-white mb-4 flex items-center justify-between">
+                            <span><i class="fa-solid fa-bullseye text-brand-light mr-2"></i> Metas do Dia</span>
+                            <span class="text-xs text-brand-accent font-semibold">Consistência 100%</span>
+                        </h3>
+                        <div class="space-y-4">
+                            <!-- Água -->
+                            <div class="bg-dark-800/80 p-4 rounded-xl border border-gray-700/50">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm font-semibold text-gray-200"><i class="fa-solid fa-droplet text-blue-400 mr-2"></i> Água (3.0L)</span>
+                                    <span id="water-text" class="text-xs font-bold text-blue-400">1.5L / 3.0L</span>
+                                </div>
+                                <div class="w-full bg-dark-900 rounded-full h-2 mb-3">
+                                    <div id="water-bar" class="bg-blue-500 h-2 rounded-full transition-all" style="width: 50%;"></div>
+                                </div>
+                                <button onclick="addWater(500)" class="w-full bg-dark-700 hover:bg-dark-600 text-blue-300 text-xs font-bold py-2 rounded-lg border border-blue-500/20 transition-all">+ Adicionar 500ml</button>
+                            </div>
+
+                            <!-- Alimentação Saudável -->
+                            <div class="bg-dark-800/80 p-4 rounded-xl border border-gray-700/50 flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-brand-light flex items-center justify-center font-bold">
+                                        <i class="fa-solid fa-carrot"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-bold text-white">Alimentação Saudável</h4>
+                                        <span id="diet-status" class="text-xs text-emerald-400 font-medium">Seguindo à risca</span>
+                                    </div>
+                                </div>
+                                <input type="checkbox" id="diet-checkbox" checked onchange="toggleDiet(this)" class="w-5 h-5 rounded accent-brand-primary cursor-pointer">
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-white">Momento Ideal para Tarefas de Alta Complexidade (Plassô / Estratégia)</h3>
-                        <p class="text-sm text-gray-400 mt-1 max-w-2xl">Seu córtex pré-frontal está no ápice de foco analítico. Aproveite para desenhar posicionamentos, campanhas ou focar em código/estratégia.</p>
                     </div>
-                    <div class="bg-dark-800 p-4 rounded-xl border border-gray-700/60 text-center shrink-0">
-                        <span class="text-xs text-gray-400 block mb-1">Energia Biológica</span>
-                        <span class="text-2xl font-black text-emerald-400">92%</span>
+                </div>
+
+                <!-- Painel Circadiano & Estado -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-primary/20 text-brand-accent text-xs font-bold mb-3">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>Foco Analítico Ativo</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Segundo Cérebro Sincronizado</h3>
+                        <p class="text-sm text-gray-400 mt-2">Seu biorritmo está no período ideal para estratégia da Plassô e alta performance mental.</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400">
+                        <span>Status: Seguro</span>
+                        <span class="text-brand-accent font-bold">Cérebro descarregado</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Quick Metrics Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="glass-card p-5 rounded-2xl">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Água Consumida</span>
-                        <i class="fa-solid fa-droplet text-blue-400"></i>
+            <!-- SEÇÃO DE SEGUNDA-FEIRA: ORGANIZAR A CASA & ALERTA DE LOUÇA -->
+            <div id="monday-section" class="glass-card p-6 rounded-2xl border-l-4 border-brand-primary hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div id="housework-indicator" class="w-4 h-4 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <h3 class="text-base font-bold text-white">Checklist de Segunda-Feira: Organizar a Casa</h3>
                     </div>
-                    <div class="text-2xl font-black text-white">1.5L <span class="text-xs font-normal text-gray-400">/ 3.0L</span></div>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-3">
-                        <div class="bg-blue-500 h-1.5 rounded-full" style="width: 50%;"></div>
-                    </div>
+                    <span id="housework-timer-badge" class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300">Nível: Manhã (Verde)</span>
                 </div>
-                <div class="glass-card p-5 rounded-2xl">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Hábitos Concluídos</span>
-                        <i class="fa-solid fa-check-double text-emerald-400"></i>
-                    </div>
-                    <div class="text-2xl font-black text-white">4 <span class="text-xs font-normal text-gray-400">/ 6 hoje</span></div>
-                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-3">
-                        <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 66%;"></div>
-                    </div>
-                </div>
-                <div class="glass-card p-5 rounded-2xl">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Faturamento Atual</span>
-                        <i class="fa-solid fa-chart-line text-amber-400"></i>
-                    </div>
-                    <div class="text-2xl font-black text-white">R$ 5.200</div>
-                    <span class="text-xs text-brand-accent font-semibold mt-1 inline-block">Meta Mês: R$ 8.000</span>
-                </div>
-                <div class="glass-card p-5 rounded-2xl">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Próximo Evento</span>
-                        <i class="fa-solid fa-calendar-check text-indigo-400"></i>
-                    </div>
-                    <div class="text-lg font-bold text-white truncate">Reunião Plassô</div>
-                    <span class="text-xs text-gray-400 mt-1 inline-block">Hoje, 14:30</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="housework-checklist">
+                    <label class="p-3 bg-dark-800 rounded-xl border border-gray-700 flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-brand-primary">
+                        <span class="text-sm text-gray-200">Lavar a louça</span>
+                    </label>
+                    <label class="p-3 bg-dark-800 rounded-xl border border-gray-700 flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-brand-primary">
+                        <span class="text-sm text-gray-200">Lavar o banheiro</span>
+                    </label>
+                    <label class="p-3 bg-dark-800 rounded-xl border border-gray-700 flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 rounded accent-brand-primary">
+                        <span class="text-sm text-gray-200">Limpar a casa inteira</span>
+                    </label>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card p-6 rounded-2xl">
-                    <h3 class="text-base font-bold text-white mb-4 flex items-center justify-between">
-                        <span><i class="fa-solid fa-list-check text-brand-primary mr-2"></i> Caixa de Entrada (GTD Inbox)</span>
-                        <span class="text-xs text-gray-400 font-normal">Cérebro descarregado</span>
-                    </h3>
-                    <div class="space-y-2.5 mb-4" id="gtd-inbox-list">
-                        <div class="p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm">
-                            <span class="text-gray-200">Ajustar roteiro de reels para cliente Rodeio 360</span>
-                            <button class="text-xs text-brand-accent hover:underline font-semibold" onclick="this.parentElement.remove()">Processar</button>
+            <!-- ALERTA DE LOUÇA DIÁRIA (Após as 17h) -->
+            <div id="daily-dish-alert" class="hidden glass-card p-6 rounded-2xl border-l-4 border-amber-500 bg-amber-500/5">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Verificação Noturna: Louça do Dia Limpa?</h3>
+                            <p class="text-xs text-gray-400">Mantenha a pia limpa para garantir clareza mental ao acordar amanhã.</p>
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <input type="text" id="new-gtd-input" placeholder="Despeje qualquer pensamento aqui..." class="flex-1 bg-dark-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-primary">
-                        <button onclick="addGtdItem()" class="bg-brand-primary text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-600 transition-all">Capturar</button>
-                    </div>
-                </div>
-
-                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-base font-bold text-white mb-4 flex items-center space-x-2">
-                            <i class="fa-solid fa-shield-heart text-emerald-400"></i>
-                            <span>Regulador Circadiano & Conselhos do Core</span>
-                        </h3>
-                        <ul class="space-y-3 text-sm text-gray-300">
-                            <li class="flex items-start space-x-3">
-                                <i class="fa-solid fa-circle-check text-brand-accent mt-1"></i>
-                                <span><strong>Hidratação:</strong> Ingerir 500ml de água logo após acordar para despertar o sistema nervoso.</span>
-                            </li>
-                            <li class="flex items-start space-x-3">
-                                <i class="fa-solid fa-circle-check text-brand-accent mt-1"></i>
-                                <span><strong>Foco Profundo:</strong> Evite checar redes sociais nos primeiros 60 minutos do dia. Preserve sua dopamina.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-gray-800 text-xs text-gray-400 flex justify-between items-center">
-                        <span>Status do Sistema: Sincronizado</span>
-                        <span class="text-brand-accent font-semibold">Próximo ciclo em 45 min</span>
+                        <button onclick="resolveDish(true)" class="bg-brand-primary hover:bg-brand-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md">
+                            <i class="fa-solid fa-check mr-1"></i> Sim, louça limpa!
+                        </button>
+                        <button onclick="resolveDish(false)" class="bg-dark-700 hover:bg-dark-600 text-gray-300 text-xs font-bold px-4 py-2.5 rounded-xl transition-all">
+                            Pendente
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 2: AGENTE & LEITOR DE FOTOS (CHAT IA INTeligente) -->
-        <div id="tab-ia-chat" class="tab-content hidden space-y-6">
-            <div class="glass-card p-6 rounded-2xl flex flex-col h-[680px]">
-                <div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-4">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-white">Segundo Cérebro • Assistente Inteligente</h3>
-                            <p class="text-xs text-gray-400">Envie prints, fotos de eventos, trabalhos ou documentos PDF/PPTX para interpretação automática.</p>
-                        </div>
+        <!-- TAB 2: TAREFAS (KANBAN) -->
+        <div id="tab-tarefas" class="tab-content hidden space-y-6">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Gerenciamento de Tarefas (Kanban)</h3>
+                    <p class="text-sm text-gray-400">Organize demandas urgentes (<48h), a fazer (>48h) e concluídas.</p>
+                </div>
+                <button onclick="addTaskModal()" class="bg-brand-primary hover:bg-brand-dark text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Nova Tarefa</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Coluna 1: Urgentes (<48h) -->
+                <div class="glass-card p-5 rounded-2xl flex flex-col h-[600px] border-t-4 border-rose-500">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-800">
+                        <h4 class="text-sm font-bold text-white flex items-center">
+                            <i class="fa-solid fa-triangle-exclamation text-rose-500 mr-2"></i> Urgentes (&lt;48h)
+                        </h4>
+                        <span id="count-urgente" class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 text-xs font-bold">0</span>
                     </div>
-                    <span class="px-3 py-1 bg-brand-primary/10 text-brand-primary text-xs font-semibold rounded-full">Modelo Core Ativo</span>
+                    <div class="flex-1 overflow-y-auto space-y-3" id="kanban-urgente"></div>
                 </div>
 
-                <!-- Chat Messages Area -->
-                <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4">
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">IA</div>
-                        <div class="bg-dark-800 border border-gray-700/60 p-4 rounded-2xl text-sm text-gray-200 max-w-xl">
-                            Olá, Marcelo! Estou pronto. Pode enviar um print, foto de evento, trabalho da faculdade ou arquivo. Vou interpretar e perguntar se deseja agendar na agenda ou transcrever na matéria correspondente!
-                        </div>
+                <!-- Coluna 2: A Fazer (>48h) -->
+                <div class="glass-card p-5 rounded-2xl flex flex-col h-[600px] border-t-4 border-amber-500">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-800">
+                        <h4 class="text-sm font-bold text-white flex items-center">
+                            <i class="fa-solid fa-clock text-amber-500 mr-2"></i> A Fazer (&gt;48h)
+                        </h4>
+                        <span id="count-afazer" class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 text-xs font-bold">0</span>
                     </div>
+                    <div class="flex-1 overflow-y-auto space-y-3" id="kanban-afazer"></div>
                 </div>
 
-                <!-- Attached Preview Banner -->
-                <div id="attachment-preview" class="hidden mb-3 p-3 bg-dark-800 border border-indigo-500/30 rounded-xl flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <i class="fa-solid fa-file-image text-indigo-400 text-lg"></i>
-                        <div>
-                            <span id="attached-filename" class="text-xs font-bold text-white block">arquivo.png</span>
-                            <span class="text-[10px] text-gray-400">Pronto para processamento e extração</span>
-                        </div>
+                <!-- Coluna 3: Pronto -->
+                <div class="glass-card p-5 rounded-2xl flex flex-col h-[600px] border-t-4 border-emerald-500">
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-800">
+                        <h4 class="text-sm font-bold text-white flex items-center">
+                            <i class="fa-solid fa-circle-check text-brand-light mr-2"></i> Pronto
+                        </h4>
+                        <span id="count-pronto" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-xs font-bold">0</span>
                     </div>
-                    <button onclick="removeAttachment()" class="text-gray-400 hover:text-rose-400 text-xs"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-
-                <!-- Chat Input Bar -->
-                <div class="flex items-center space-x-3 pt-3 border-t border-gray-800">
-                    <label class="cursor-pointer bg-dark-700 hover:bg-dark-600 text-gray-300 p-3 rounded-xl border border-gray-700 transition-all flex items-center justify-center" title="Enviar Foto ou Arquivo">
-                        <i class="fa-solid fa-paperclip text-brand-primary"></i>
-                        <input type="file" id="file-upload-input" class="hidden" accept="image/*,.pdf,.pptx" onchange="handleFileSelect(event)">
-                    </label>
-                    <input type="text" id="chat-input" placeholder="Digite uma instrução ou envie um arquivo para análise..." class="flex-1 bg-dark-800 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary" onkeypress="if(event.key === 'Enter') sendChatMessage()">
-                    <button onclick="sendChatMessage()" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold shadow-lg shadow-indigo-500/20 transition-all">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
+                    <div class="flex-1 overflow-y-auto space-y-3" id="kanban-pronto"></div>
                 </div>
             </div>
         </div>
@@ -307,12 +329,9 @@
                 <div class="flex justify-between items-center mb-6">
                     <div>
                         <h3 class="text-lg font-bold text-white">Rotina Diária & Hábitos de Alta Performance</h3>
-                        <p class="text-sm text-gray-400">Mantenha a consistência mecânica para liberar espaço mental.</p>
+                        <p class="text-sm text-gray-400">Consistência mecânica para liberar espaço mental.</p>
                     </div>
-                    <button onclick="addHabitPrompt()" class="bg-dark-700 hover:bg-dark-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-gray-700 transition-all flex items-center space-x-2">
-                        <i class="fa-solid fa-plus text-brand-primary"></i>
-                        <span>Novo Hábito</span>
-                    </button>
+                    <button onclick="addHabitPrompt()" class="bg-dark-700 hover:bg-dark-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-gray-700 transition-all">Novo Hábito</button>
                 </div>
                 <div class="space-y-3" id="habits-list-container"></div>
             </div>
@@ -332,89 +351,89 @@
                             <span class="px-4 py-2 text-xs font-bold text-white border-x border-gray-700 flex items-center" id="current-month-label">Outubro</span>
                             <button onclick="changeMonth(1)" class="px-3 py-2 text-gray-300 hover:bg-dark-700 text-xs font-bold"><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
-                        <button onclick="addEventModal()" class="bg-brand-primary hover:bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 transition-all flex items-center space-x-2">
+                        <button onclick="addEventModal()" class="bg-brand-primary hover:bg-brand-dark text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg transition-all flex items-center space-x-2">
                             <i class="fa-solid fa-plus"></i>
                             <span>Novo Agendamento</span>
                         </button>
                     </div>
                 </div>
-
-                <!-- Calendar Grid Header -->
                 <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-gray-400 mb-2">
                     <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
                 </div>
-
-                <!-- Calendar Days Grid -->
-                <div class="grid grid-cols-7 gap-2" id="calendar-grid">
-                    <!-- Gerado por JS -->
-                </div>
-            </div>
-
-            <!-- Lista de Eventos do Mês -->
-            <div class="glass-card p-6 rounded-2xl">
-                <h3 class="text-base font-bold text-white mb-4">Compromissos Agendados</h3>
-                <div class="space-y-3" id="agenda-list-container"></div>
+                <div class="grid grid-cols-7 gap-2" id="calendar-grid"></div>
             </div>
         </div>
 
-        <!-- TAB 5: ESTUDOS & FACULDADE (Com Sub-abas e Anotações) -->
+        <!-- TAB 5: ESTUDOS & UNIALFA -->
         <div id="tab-estudos" class="tab-content hidden space-y-6">
             <div class="glass-card p-6 rounded-2xl">
                 <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-800">
                     <div>
                         <h3 class="text-lg font-bold text-white">Unialfa • Curso de Marketing</h3>
-                        <p class="text-sm text-gray-400">Anotações por Matéria e Transcrições de PDFs/PPTXs</p>
+                        <p class="text-sm text-gray-400">Anotações por Matéria</p>
                     </div>
-                    <button onclick="addSubjectModal()" class="bg-dark-700 hover:bg-dark-600 text-white text-xs font-semibold px-3.5 py-2 rounded-xl border border-gray-700">
-                        <i class="fa-solid fa-plus text-brand-primary mr-1"></i> Nova Matéria
-                    </button>
+                    <button onclick="addSubjectModal()" class="bg-dark-700 hover:bg-dark-600 text-white text-xs font-semibold px-3.5 py-2 rounded-xl border border-gray-700">Nova Matéria</button>
                 </div>
-
-                <!-- Sub-abas de Matérias -->
-                <div class="flex flex-wrap gap-2 mb-6" id="subjects-tabs">
-                    <!-- Gerado via JS -->
-                </div>
-
-                <!-- Área de Anotações da Matéria Selecionada -->
+                <div class="flex flex-wrap gap-2 mb-6" id="subjects-tabs"></div>
                 <div class="bg-dark-800/80 border border-gray-700/50 rounded-2xl p-5">
                     <div class="flex justify-between items-center mb-4">
-                        <h4 id="active-subject-title" class="text-base font-bold text-white">Gestão Estratégica de Marcas</h4>
-                        <button onclick="saveSubjectNotes()" class="bg-brand-primary hover:bg-indigo-600 text-white text-xs font-semibold px-4 py-2 rounded-xl">Salvar Anotações</button>
+                        <h4 id="active-subject-title" class="text-base font-bold text-white">Matéria</h4>
+                        <button onclick="saveSubjectNotes()" class="bg-brand-primary hover:bg-brand-dark text-white text-xs font-semibold px-4 py-2 rounded-xl">Salvar Anotações</button>
                     </div>
-                    <textarea id="subject-notes-textarea" rows="8" placeholder="Escreva suas anotações aqui ou use o Agente para transcrever conteúdos de PDFs e PPTXs..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-4 text-sm text-gray-200 focus:outline-none focus:border-brand-primary leading-relaxed"></textarea>
+                    <textarea id="subject-notes-textarea" rows="8" class="w-full bg-dark-900 border border-gray-700 rounded-xl p-4 text-sm text-gray-200 focus:outline-none focus:border-brand-primary leading-relaxed"></textarea>
                 </div>
             </div>
         </div>
 
         <!-- TAB 6: FINANCEIRO & METAS (30K) -->
         <div id="tab-financeiro" class="tab-content hidden space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div class="glass-card p-6 rounded-2xl border-l-4 border-brand-primary">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Meta Rumo aos R$ 30k (6 Meses)</span>
-                    <div class="text-2xl font-black text-white mt-1">R$ 5.200 <span class="text-xs text-gray-400 font-normal">/ R$ 30.000</span></div>
-                    <div class="w-full bg-dark-900 rounded-full h-2 mt-4">
-                        <div class="bg-brand-primary h-2 rounded-full" style="width: 17.3%;"></div>
+            <!-- Barra de Meta Estilo XP (Maior) -->
+            <div class="glass-card p-6 rounded-2xl border border-emerald-500/30">
+                <div class="flex justify-between items-center mb-3">
+                    <div>
+                        <span class="text-xs font-semibold text-gray-400 uppercase">Meta Rumo aos R$ 30k (6 Meses)</span>
+                        <h3 class="text-xl font-black text-white mt-1">Faturamento Atual: <span class="text-brand-accent" id="finance-total-net">R$ 5.200,00</span> / R$ 30.000,00</h3>
                     </div>
-                    <span class="text-xs text-brand-accent font-semibold mt-2 inline-block">Faturamento Atual Plassô</span>
+                    <span id="meta-percent" class="px-3 py-1 bg-emerald-500/20 text-emerald-300 font-bold text-sm rounded-full">17.3% Concluído</span>
                 </div>
-                <div class="glass-card p-6 rounded-2xl border-l-4 border-emerald-400">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Total Entradas (Mês)</span>
-                    <div class="text-2xl font-black text-emerald-400 mt-1" id="total-entradas-val">R$ 5.200,00</div>
-                    <button onclick="openFinanceModal('Entrada')" class="mt-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-500/30 transition-all">
-                        <i class="fa-solid fa-plus mr-1"></i> Nova Entrada
-                    </button>
-                </div>
-                <div class="glass-card p-6 rounded-2xl border-l-4 border-rose-500">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Total Saídas (Mês)</span>
-                    <div class="text-2xl font-black text-rose-400 mt-1" id="total-saidas-val">R$ 1.850,00</div>
-                    <button onclick="openFinanceModal('Saída')" class="mt-3 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-rose-500/30 transition-all">
-                        <i class="fa-solid fa-plus mr-1"></i> Nova Saída
-                    </button>
+                <div class="w-full bg-dark-900 rounded-full h-4 overflow-hidden border border-gray-800">
+                    <div id="finance-xp-bar" class="bg-gradient-to-r from-brand-primary to-brand-accent h-4 rounded-full transition-all duration-500" style="width: 17.3%;"></div>
                 </div>
             </div>
-            <div class="glass-card p-6 rounded-2xl">
-                <h3 class="text-lg font-bold text-white mb-4">Movimentações Financeiras</h3>
-                <div class="space-y-3" id="financial-list"></div>
+
+            <!-- Dois Quadros Separados: Entradas e Saídas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Quadro de Entradas -->
+                <div class="glass-card p-6 rounded-2xl border-t-4 border-emerald-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-800">
+                            <div>
+                                <span class="text-xs font-semibold text-gray-400 uppercase">Entradas</span>
+                                <h3 id="total-entradas-val" class="text-xl font-black text-emerald-400 mt-0.5">R$ 0,00</h3>
+                            </div>
+                            <button onclick="openFinanceModal('Entrada')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-md">
+                                <i class="fa-solid fa-plus mr-1"></i> Nova Entrada
+                            </button>
+                        </div>
+                        <div class="space-y-3 max-h-[400px] overflow-y-auto" id="list-entradas"></div>
+                    </div>
+                </div>
+
+                <!-- Quadro de Saídas -->
+                <div class="glass-card p-6 rounded-2xl border-t-4 border-rose-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-800">
+                            <div>
+                                <span class="text-xs font-semibold text-gray-400 uppercase">Saídas & Vencimentos</span>
+                                <h3 id="total-saidas-val" class="text-xl font-black text-rose-400 mt-0.5">R$ 0,00</h3>
+                            </div>
+                            <button onclick="openFinanceModal('Saída')" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition-all shadow-md">
+                                <i class="fa-solid fa-plus mr-1"></i> Nova Saída
+                            </button>
+                        </div>
+                        <div class="space-y-3 max-h-[400px] overflow-y-auto" id="list-saidas"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -432,17 +451,45 @@
             </div>
         </div>
 
-        <!-- TAB 8: CRESCIMENTO & RODA DA VIDA -->
+        <!-- TAB 8: DESPEJO / DIÁRIO (TELA CHEIA) -->
+        <div id="tab-despejo" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl flex flex-col h-[720px]">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-gray-800 mb-4 gap-4">
+                    <div>
+                        <h3 id="journal-today-title" class="text-lg font-bold text-white">Despejo Mental / Diário • Hoje</h3>
+                        <p class="text-xs text-gray-400">Caixa de texto imersiva em tela cheia para descarregar o cérebro sem dispersão.</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="saveJournalToday()" class="bg-brand-primary hover:bg-brand-dark text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md">Salvar Diário</button>
+                    </div>
+                </div>
+
+                <div class="flex-1 flex flex-col md:flex-row gap-6 overflow-hidden">
+                    <!-- Caixa de Texto Tela Cheia -->
+                    <div class="flex-1 flex flex-col">
+                        <textarea id="journal-textarea" placeholder="Despeje todos os seus pensamentos aqui sem filtros..." class="flex-1 w-full bg-dark-900 border border-gray-700/80 rounded-2xl p-5 text-base text-gray-100 focus:outline-none focus:border-brand-primary leading-relaxed resize-none"></textarea>
+                    </div>
+
+                    <!-- Histórico de Dias Passados -->
+                    <div class="w-full md:w-80 bg-dark-800/80 border border-gray-700/50 rounded-2xl p-4 flex flex-col">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Dias Anteriores Armazenados</h4>
+                        <div class="flex-1 overflow-y-auto space-y-2 pr-1" id="journal-history-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 9: RODA DA VIDA (INTERATIVA) -->
         <div id="tab-crescimento" class="tab-content hidden space-y-6">
             <div class="glass-card p-6 rounded-2xl">
                 <div class="flex justify-between items-center mb-6">
                     <div>
                         <h3 class="text-lg font-bold text-white">Roda da Vida & Teste Semanal de Crescimento</h3>
-                        <p class="text-sm text-gray-400">Auto-avaliação semanal para reequilibrar áreas da sua vida profissional e pessoal.</p>
+                        <p class="text-sm text-gray-400">Ajuste os sliders para reequilibrar suas áreas de alta performance.</p>
                     </div>
-                    <button onclick="triggerWheelCheckin()" class="bg-brand-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl">Iniciar Teste Semanal</button>
+                    <button onclick="saveWheelScores()" class="bg-brand-primary hover:bg-brand-dark text-white text-xs font-semibold px-4 py-2.5 rounded-xl">Salvar Avaliação</button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="wheel-container"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="wheel-sliders-container"></div>
             </div>
         </div>
 
@@ -453,24 +500,28 @@
         const State = {
             xp: 1450,
             level: 3,
-            currentMonth: 9, // Outubro (0-indexado)
+            currentMonth: 9,
             currentYear: 2026,
+            plantGrowth: 60,
+            waterMl: 1500,
+            dietOk: true,
             activeSubjectId: 1,
             habits: [
                 { id: 1, title: 'Beber 500ml de água ao acordar', done: true, time: '07:00' },
                 { id: 2, title: 'Leitura de desenvolvimento (15 min)', done: true, time: '08:00' },
-                { id: 3, title: 'Treino na ARMS Gym', done: false, time: '18:00' },
-                { id: 4, title: 'Revisão das finanças e faturamento Plassô', done: false, time: '20:00' }
+                { id: 3, title: 'Treino na ARMS Gym', done: false, time: '18:00' }
+            ],
+            tasks: [
+                { id: 1, title: 'Ajustar campanha principal Plassô', column: 'urgente', deadline: 'Hoje' },
+                { id: 2, title: 'Revisar relatório financeiro mensal', column: 'afazer', deadline: 'Daqui a 4 dias' },
+                { id: 3, title: 'Criar criativos para Rodeio 360', column: 'pronto', deadline: 'Concluído' }
             ],
             agenda: [
-                { id: 1, title: 'Reunião estratégica Plassô', date: '2026-10-15', time: '14:30', type: 'Reunião' },
-                { id: 2, title: 'Gravação de conteúdo com Drone DJI Mini 4K', date: '2026-10-18', time: '16:30', type: 'Gravação' },
-                { id: 3, title: 'Prova de Gestão na Unialfa', date: '2026-10-25', time: '19:00', type: 'Faculdade' }
+                { id: 1, title: 'Reunião estratégica Plassô', date: '2026-10-15', time: '14:30', type: 'Reunião' }
             ],
             subjects: [
-                { id: 1, name: 'Gestão Estratégica de Marcas', notes: 'Anotações iniciais sobre posicionamento de mercado para a Plassô e clientes.' },
-                { id: 2, name: 'Marketing Digital Avançado', notes: 'Estudo sobre tráfego pago, funis de conversão e estratégias de lançamento.' },
-                { id: 3, name: 'Planejamento de Mídia', notes: 'Organização de calendários editoriais e métricas de desempenho.' }
+                { id: 1, name: 'Gestão Estratégica de Marcas', notes: 'Anotações sobre posicionamento de mercado.' },
+                { id: 2, name: 'Marketing Digital Avançado', notes: 'Funis de conversão.' }
             ],
             finances: [
                 { id: 1, title: 'Cliente Plassô (Contrato Mensal)', amount: 2500.00, type: 'Entrada' },
@@ -481,9 +532,7 @@
             workouts: [
                 { day: 'Segunda-feira', focus: 'Membros Superiores (Peito / Tríceps)', status: 'Concluído' },
                 { day: 'Terça-feira', focus: 'Membros Inferiores (Quadríceps / Panturrilha)', status: 'Concluído' },
-                { day: 'Quarta-feira', focus: 'Costas / Bíceps / Core', status: 'Pendente' },
-                { day: 'Quinta-feira', focus: 'Ombros / Trapézio', status: 'Pendente' },
-                { day: 'Sexta-feira', focus: 'Full Body & Condicionamento', status: 'Pendente' }
+                { day: 'Quarta-feira', focus: 'Costas / Bíceps / Core', status: 'Pendente' }
             ],
             wheel: [
                 { area: 'Carreira & Negócios (Plassô)', score: 8 },
@@ -492,21 +541,37 @@
                 { area: 'Estudos & Conhecimento', score: 8 },
                 { area: 'Desenvolvimento Pessoal', score: 7 },
                 { area: 'Lazer & Descanso', score: 5 }
+            ],
+            journalToday: '',
+            journalHistory: [
+                { date: '27/10/2026', text: 'Ontem foi um dia produtivo na agência. Fechamos novos contratos e o foco em design esteve excelente.' }
             ]
         };
 
-        let tempAttachedFile = null;
-
         function saveState() {
-            localStorage.setItem('second_brain_v2_state', JSON.stringify(State));
+            localStorage.setItem('second_brain_v3_state', JSON.stringify(State));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('second_brain_v2_state');
+            const saved = localStorage.getItem('second_brain_v3_state');
             if (saved) {
                 const parsed = JSON.parse(saved);
                 Object.assign(State, parsed);
             }
+            // Verificar virada de dia para o diário
+            checkJournalRollover();
+        }
+
+        function checkJournalRollover() {
+            const todayStr = new Date().toLocaleDateString('pt-BR');
+            if (State.lastJournalDate && State.lastJournalDate !== todayStr) {
+                if (State.journalToday && State.journalToday.trim() !== '') {
+                    State.journalHistory.unshift({ date: State.lastJournalDate, text: State.journalToday });
+                }
+                State.journalToday = '';
+            }
+            State.lastJournalDate = todayStr;
+            saveState();
         }
 
         function switchTab(tabId) {
@@ -514,23 +579,24 @@
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-brand-primary/20');
+                btn.classList.remove('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-emerald-500/20');
                 btn.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-dark-700/50');
                 if (btn.dataset.target === tabId) {
-                    btn.classList.add('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-brand-primary/20');
+                    btn.classList.add('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-emerald-500/20');
                     btn.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-dark-700/50');
                 }
             });
 
             const titles = {
-                'dashboard': ['Dashboard & Ciclo Circadiano', 'Visão geral do seu estado cognitivo e bio-ritmo.'],
-                'ia-chat': ['Agente & Leitor de Mídia', 'Interpretação inteligente de prints, fotos, PDFs e PPTXs.'],
+                'dashboard': ['Dashboard Principal', 'Visão geral do seu estado cognitivo e metas diárias.'],
+                'tarefas': ['Gerenciamento de Tarefas (Kanban)', 'Controle de prazos e entregas.'],
                 'rotina': ['Rotina & Hábitos Diários', 'Consistência mecânica para liberar espaço mental.'],
                 'agenda': ['Calendário & Agenda Executiva', 'Gerenciamento visual por calendário mensal.'],
-                'estudos': ['Estudos & Unialfa', 'Anotações por matéria e transcrição de arquivos.'],
-                'financeiro': ['Financeiro & Metas (30k)', 'Controle de entradas, saídas e faturamento rumo aos R$ 30k.'],
+                'estudos': ['Estudos & Unialfa', 'Anotações por matéria e cronograma acadêmico.'],
+                'financeiro': ['Financeiro & Metas (30k)', 'Controle de entradas, saídas e faturamento.'],
                 'treino': ['Treino ARMS Gym', 'Ordem dos exercícios, frequência e cargas.'],
-                'crescimento': ['Crescimento & Roda da Vida', 'Avaliação semanal e ajustes de alta performance.']
+                'despejo': ['Despejo / Diário', 'Caixa de texto imersiva em tela cheia.'],
+                'crescimento': ['Roda da Vida', 'Avaliação interativa de alta performance.']
             };
 
             document.getElementById('page-title').innerText = titles[tabId][0];
@@ -540,236 +606,207 @@
 
         setInterval(() => {
             document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('pt-BR');
+            checkMondayAndAlerts();
         }, 1000);
 
+        function checkMondayAndAlerts() {
+            const now = new Date();
+            const dayOfWeek = now.getDay(); // 1 = Segunda
+            const hour = now.getHours();
+
+            // Segunda-feira (1)
+            const mondaySec = document.getElementById('monday-section');
+            if (dayOfWeek === 1) {
+                mondaySec.classList.remove('hidden');
+                const badge = document.getElementById('housework-timer-badge');
+                const indicator = document.getElementById('housework-indicator');
+                if (hour < 12) {
+                    badge.className = "text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300";
+                    badge.innerText = "Nível: Manhã (Verde)";
+                    indicator.className = "w-4 h-4 rounded-full bg-emerald-500 animate-pulse";
+                } else if (hour >= 12 && hour < 18) {
+                    badge.className = "text-xs font-bold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300";
+                    badge.innerText = "Nível: Tarde (Amarelo - Atenção)";
+                    indicator.className = "w-4 h-4 rounded-full bg-amber-500 animate-pulse";
+                } else {
+                    badge.className = "text-xs font-bold px-3 py-1 rounded-full bg-rose-500/20 text-rose-300";
+                    badge.innerText = "Nível: Noite (Vermelho - Crítico!)";
+                    indicator.className = "w-4 h-4 rounded-full bg-rose-500 animate-pulse";
+                }
+            } else {
+                mondaySec.classList.add('hidden');
+            }
+
+            // Alerta de Louça Diária após as 17h
+            const dishAlert = document.getElementById('daily-dish-alert');
+            if (hour >= 17) {
+                dishAlert.classList.remove('hidden');
+            } else {
+                dishAlert.classList.add('hidden');
+            }
+        }
+
         function renderAll() {
+            renderDashboard();
+            renderKanban();
             renderHabits();
             renderCalendar();
-            renderAgendaList();
             renderSubjects();
             renderFinances();
             renderWorkouts();
-            renderWheel();
+            renderJournal();
+            renderWheelSliders();
             updateGamificationUI();
         }
 
-        // CHAT IA & LEITOR DE FOTOS/ARQUIVOS
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                tempAttachedFile = file;
-                document.getElementById('attached-filename').innerText = file.name;
-                document.getElementById('attachment-preview').classList.remove('hidden');
+        // DASHBOARD & PLANTA
+        function renderDashboard() {
+            // Água
+            document.getElementById('water-text').innerText = `${(State.waterMl / 1000).toFixed(1)}L / 3.0L`;
+            const waterPct = Math.min(100, (State.waterMl / 3000) * 100);
+            document.getElementById('water-bar').style.width = `${waterPct}%`;
+
+            // Dieta
+            document.getElementById('diet-checkbox').checked = State.dietOk;
+            document.getElementById('diet-status').innerText = State.dietOk ? "Seguindo à risca" : "Dieta furada (-Veneno)";
+
+            // Planta
+            document.getElementById('plant-growth-bar').style.width = `${State.plantGrowth}%`;
+            const icon = document.getElementById('plant-icon');
+            if (State.plantGrowth > 75) {
+                icon.className = "fa-solid fa-tree text-brand-light";
+                document.getElementById('plant-stage').innerText = "Árvore Robusta";
+            } else if (State.plantGrowth > 40) {
+                icon.className = "fa-solid fa-seedling text-brand-light";
+                document.getElementById('plant-stage').innerText = "Crescendo";
+            } else {
+                icon.className = "fa-solid fa-seedling text-rose-400";
+                document.getElementById('plant-stage').innerText = "Murchando";
             }
         }
 
-        function removeAttachment() {
-            tempAttachedFile = null;
-            document.getElementById('attachment-preview').classList.add('hidden');
-            document.getElementById('file-upload-input').value = '';
+        function addWater(ml) {
+            State.waterMl = Math.min(3000, State.waterMl + ml);
+            feedPlant('fertilizer');
+            saveState();
+            renderDashboard();
         }
 
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if (!text && !tempAttachedFile) return;
-
-            const chatMessages = document.getElementById('chat-messages');
-            
-            // User message bubble
-            let userHtml = `<div class="flex items-start justify-end space-x-3">
-                <div class="bg-brand-primary text-white p-4 rounded-2xl text-sm max-w-xl shadow-md">
-                    ${text ? `<p>${text}</p>` : ''}
-                    ${tempAttachedFile ? `<p class="text-xs mt-1 font-semibold text-indigo-100 flex items-center gap-1"><i class="fa-solid fa-paperclip"></i> ${tempAttachedFile.name}</p>` : ''}
-                </div>
-                <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white text-xs font-bold shrink-0">EU</div>
-            </div>`;
-            chatMessages.insertAdjacentHTML('beforeend', userHtml);
-            input.value = '';
-
-            const attachedName = tempAttachedFile ? tempAttachedFile.name : '';
-            removeAttachment();
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            // Simulação de Resposta Inteligente da IA
-            setTimeout(() => {
-                let aiReply = "Analisei sua solicitação com sucesso!";
-                let actionCard = "";
-
-                const lowerText = text.toLowerCase();
-                if (attachedName.match(/\.(pdf|pptx)$/i) || lowerText.includes('transcrever')) {
-                    aiReply = `Li o arquivo <strong>${attachedName || 'enviado'}</strong>. Identifiquei conteúdos cruciais de Marketing. Deseja que eu transcreva automaticamente na matéria selecionada ("Gestão Estratégica de Marcas")?`;
-                    actionCard = `<div class="mt-3 flex gap-2"><button onclick="executeAiAction('transcribe', '${attachedName}')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Sim, transcrever na matéria</button></div>`;
-                } else if (attachedName.match(/\.(png|jpg|jpeg)$/i) || lowerText.includes('reunião') || lowerText.includes('trabalho') || lowerText.includes('evento')) {
-                    aiReply = `Interpretei a imagem/print enviado. Identifiquei um evento potencial: <strong>"Reunião / Trabalho - Próxima Terça às 15:00"</strong>. Deseja que eu agende automaticamente na sua agenda?`;
-                    actionCard = `<div class="mt-3 flex gap-2"><button onclick="executeAiAction('schedule', 'Reunião/Trabalho Extraído')" class="bg-brand-primary hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Sim, agendar no Calendário</button></div>`;
-                } else {
-                    aiReply = `Compreendi sua instrução. Processada com sucesso pelo seu Segundo Cérebro. Mais alguma demanda?`;
-                }
-
-                let aiHtml = `<div class="flex items-start space-x-3">
-                    <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">IA</div>
-                    <div class="bg-dark-800 border border-gray-700/60 p-4 rounded-2xl text-sm text-gray-200 max-w-xl shadow-md">
-                        <p>${aiReply}</p>
-                        ${actionCard}
-                    </div>
-                </div>`;
-                chatMessages.insertAdjacentHTML('beforeend', aiHtml);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                addXP(25);
-            }, 800);
+        function toggleDiet(el) {
+            State.dietOk = el.checked;
+            if (!State.dietOk) feedPlant('poison');
+            else feedPlant('fertilizer');
+            saveState();
+            renderDashboard();
         }
 
-        function executeAiAction(actionType, detail) {
-            if (actionType === 'schedule') {
-                State.agenda.push({ id: Date.now(), title: detail, date: '2026-10-28', time: '15:00', type: 'Inteligente' });
-                saveState();
-                renderCalendar();
-                renderAgendaList();
-                alert("Evento agendado com sucesso no seu Calendário!");
-            } else if (actionType === 'transcribe') {
-                const sub = State.subjects.find(s => s.id === State.activeSubjectId);
-                if (sub) {
-                    sub.notes += `\n\n[Transcrição Automática de ${detail}]: Conceitos fundamentais de estratégias de posicionamento, análise de concorrentes e diferenciação de marca.`;
-                    saveState();
-                    renderSubjects();
-                    alert(`Conteúdo transcrito com sucesso para a matéria ${sub.name}!`);
-                }
-            }
-        }
-
-        // CALENDÁRIO & AGENDA
-        const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-
-        function changeMonth(direction) {
-            State.currentMonth += direction;
-            if (State.currentMonth > 11) { State.currentMonth = 0; State.currentYear++; }
-            if (State.currentMonth < 0) { State.currentMonth = 11; State.currentYear--; }
-            renderCalendar();
-        }
-
-        function renderCalendar() {
-            document.getElementById('calendar-month-year').innerText = `${monthNames[State.currentMonth]} de ${State.currentYear}`;
-            document.getElementById('current-month-label').innerText = monthNames[State.currentMonth];
-
-            const grid = document.getElementById('calendar-grid');
-            grid.innerHTML = '';
-
-            const firstDayIndex = new Date(State.currentYear, State.currentMonth, 1).getDay();
-            const totalDays = new Date(State.currentYear, State.currentMonth + 1, 0).getDate();
-
-            // Dias vazios do mês anterior
-            for (let i = 0; i < firstDayIndex; i++) {
-                grid.insertAdjacentHTML('beforeend', `<div class="h-24 bg-dark-900/40 rounded-xl border border-gray-800/40 p-2 opacity-30"></div>`);
-            }
-
-            // Dias do mês atual
-            for (let day = 1; day <= totalDays; day++) {
-                const formattedMonth = String(State.currentMonth + 1).padStart(2, '0');
-                const formattedDay = String(day).padStart(2, '0');
-                const dateStr = `${State.currentYear}-${formattedMonth}-${formattedDay}`;
-
-                const dayEvents = State.agenda.filter(ev => ev.date === dateStr);
-                const isToday = (day === 28 && State.currentMonth === 9 && State.currentYear === 2026);
-
-                let eventsHtml = dayEvents.map(ev => `<span class="block text-[10px] bg-brand-primary/20 text-indigo-300 px-1.5 py-0.5 rounded truncate font-medium mt-1">${ev.time} - ${ev.title}</span>`).join('');
-
-                grid.insertAdjacentHTML('beforeend', `
-                    <div class="h-24 bg-dark-800/70 rounded-xl border ${isToday ? 'border-brand-primary shadow-lg shadow-indigo-500/10' : 'border-gray-700/50'} p-2 flex flex-col justify-between overflow-y-auto">
-                        <span class="text-xs font-bold ${isToday ? 'text-brand-primary bg-brand-primary/10 px-1.5 py-0.5 rounded-full w-fit' : 'text-gray-300'}">${day}</span>
-                        <div class="space-y-1">${eventsHtml}</div>
-                    </div>
-                `);
-            }
-        }
-
-        function renderAgendaList() {
-            const container = document.getElementById('agenda-list-container');
-            container.innerHTML = State.agenda.map(a => `
-                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
-                    <div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-xs px-2 py-0.5 rounded bg-brand-primary/10 text-brand-primary font-bold">${a.type}</span>
-                            <span class="text-xs text-gray-400">${a.date}</span>
-                        </div>
-                        <h4 class="text-white font-semibold mt-1">${a.title}</h4>
-                    </div>
-                    <span class="text-sm font-bold text-gray-300">${a.time}</span>
-                </div>
-            `).join('');
-        }
-
-        function addEventModal() {
-            const title = prompt("Título do evento, reunião ou trabalho:");
-            const date = prompt("Data (AAAA-MM-DD):", "2026-10-30");
-            const time = prompt("Horário (HH:MM):", "14:00");
-            if (title && date) {
-                State.agenda.push({ id: Date.now(), title, date, time, type: 'Manual' });
-                saveState();
-                renderCalendar();
-                renderAgendaList();
+        function feedPlant(type) {
+            if (type === 'fertilizer') {
+                State.plantGrowth = Math.min(100, State.plantGrowth + 15);
                 addXP(30);
+            } else {
+                State.plantGrowth = Math.max(10, State.plantGrowth - 20);
+            }
+            saveState();
+            renderDashboard();
+        }
+
+        function resolveDish(ok) {
+            if (ok) {
+                alert("Parabéns! Pia limpa registrada. Clareza mental garantida.");
+                addXP(40);
+                document.getElementById('daily-dish-alert').classList.add('hidden');
+            } else {
+                alert("Deixe a pia limpa antes de encerrar o dia!");
             }
         }
 
-        // ESTUDOS & UNIALFA
-        function renderSubjects() {
-            const tabsContainer = document.getElementById('subjects-tabs');
-            tabsContainer.innerHTML = State.subjects.map(sub => `
-                <button onclick="setActiveSubject(${sub.id})" class="px-4 py-2 rounded-xl text-xs font-bold transition-all ${sub.id === State.activeSubjectId ? 'bg-brand-primary text-white shadow-md shadow-indigo-500/20' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}">
-                    ${sub.name}
-                </button>
-            `).join('');
+        // KANBAN DE TAREFAS
+        function renderKanban() {
+            const cols = { urgente: 'kanban-urgente', afazer: 'kanban-afazer', pronto: 'kanban-pronto' };
+            const counts = { urgente: 0, afazer: 0, pronto: 0 };
 
-            const activeSub = State.subjects.find(s => s.id === State.activeSubjectId);
-            if (activeSub) {
-                document.getElementById('active-subject-title').innerText = activeSub.name;
-                document.getElementById('subject-notes-textarea').value = activeSub.notes;
+            for (let k in cols) {
+                document.getElementById(cols[k]).innerHTML = '';
             }
-        }
 
-        function setActiveSubject(id) {
-            State.activeSubjectId = id;
-            renderSubjects();
-        }
-
-        function saveSubjectNotes() {
-            const activeSub = State.subjects.find(s => s.id === State.activeSubjectId);
-            if (activeSub) {
-                activeSub.notes = document.getElementById('subject-notes-textarea').value;
-                saveState();
-                alert("Anotações salvas com sucesso!");
-                addXP(20);
-            }
-        }
-
-        function addSubjectModal() {
-            const name = prompt("Nome da nova matéria da Unialfa:");
-            if (name) {
-                State.subjects.push({ id: Date.now(), name, notes: 'Novas anotações...' });
-                saveState();
-                renderSubjects();
-            }
-        }
-
-        // FINANCEIRO & METAS
-        function renderFinances() {
-            const container = document.getElementById('financial-list');
-            container.innerHTML = State.finances.map(f => `
-                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
-                    <div>
-                        <span class="text-xs px-2 py-0.5 rounded ${f.type === 'Entrada' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'} font-bold">${f.type}</span>
-                        <h4 class="text-gray-200 font-medium mt-1">${f.title}</h4>
+            State.tasks.forEach(t => {
+                counts[t.column]++;
+                const html = `
+                    <div class="p-3.5 rounded-xl bg-dark-800 border border-gray-700/60 flex flex-col justify-between shadow-sm">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="text-white font-semibold text-sm">${t.title}</h5>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-dark-700 text-gray-300 font-medium">${t.deadline}</span>
+                        </div>
+                        <div class="flex justify-end space-x-2 pt-2 border-t border-gray-700/40">
+                            ${t.column !== 'urgente' ? `<button onclick="moveTask(${t.id}, 'urgente')" class="text-[10px] text-rose-400 font-bold hover:underline">Urgente</button>` : ''}
+                            ${t.column !== 'afazer' ? `<button onclick="moveTask(${t.id}, 'afazer')" class="text-[10px] text-amber-400 font-bold hover:underline">A Fazer</button>` : ''}
+                            ${t.column !== 'pronto' ? `<button onclick="moveTask(${t.id}, 'pronto')" class="text-[10px] text-brand-light font-bold hover:underline">Pronto</button>` : ''}
+                        </div>
                     </div>
-                    <span class="font-black text-base ${f.type === 'Entrada' ? 'text-emerald-400' : 'text-rose-400'}">R$ ${f.amount.toFixed(2)}</span>
-                </div>
-            `).join('');
+                `;
+                if (cols[t.column]) {
+                    document.getElementById(cols[t.column]).insertAdjacentHTML('beforeend', html);
+                }
+            });
 
-            const totalEntradas = State.finances.filter(f => f.type === 'Entrada').reduce((acc, curr) => acc + curr.amount, 0);
-            const totalSaidas = State.finances.filter(f => f.type === 'Saída').reduce((acc, curr) => acc + curr.amount, 0);
+            document.getElementById('count-urgente').innerText = counts.urgente;
+            document.getElementById('count-afazer').innerText = counts.afazer;
+            document.getElementById('count-pronto').innerText = counts.pronto;
+        }
+
+        function moveTask(id, newCol) {
+            const task = State.tasks.find(t => t.id === id);
+            if (task) {
+                task.column = newCol;
+                if (newCol === 'pronto') addXP(50);
+                saveState();
+                renderKanban();
+            }
+        }
+
+        function addTaskModal() {
+            const title = prompt("Título da nova tarefa:");
+            const column = prompt("Coluna (urgente, afazer, pronto):", "urgente");
+            const deadline = prompt("Prazo (ex: Hoje, Daqui a 2 dias):", "Hoje");
+            if (title && column) {
+                State.tasks.push({ id: Date.now(), title, column: column.toLowerCase(), deadline: deadline || 'Geral' });
+                saveState();
+                renderKanban();
+            }
+        }
+
+        // FINANCEIRO & METAS (30K)
+        function renderFinances() {
+            const entradas = State.finances.filter(f => f.type === 'Entrada');
+            const saidas = State.finances.filter(f => f.type === 'Saída');
+
+            const totalEntradas = entradas.reduce((acc, curr) => acc + curr.amount, 0);
+            const totalSaidas = saidas.reduce((acc, curr) => acc + curr.amount, 0);
 
             document.getElementById('total-entradas-val').innerText = `R$ ${totalEntradas.toFixed(2)}`;
             document.getElementById('total-saidas-val').innerText = `R$ ${totalSaidas.toFixed(2)}`;
+            document.getElementById('finance-total-net').innerText = `R$ ${totalEntradas.toFixed(2)}`;
+
+            const pct = Math.min(100, (totalEntradas / 30000) * 100);
+            document.getElementById('finance-xp-bar').style.width = `${pct}%`;
+            document.getElementById('meta-percent').innerText = `${pct.toFixed(1)}% Concluído`;
+
+            // Renderizar Entradas
+            document.getElementById('list-entradas').innerHTML = entradas.map(f => `
+                <div class="p-3.5 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <span class="text-gray-200 font-medium text-sm">${f.title}</span>
+                    <span class="font-bold text-emerald-400 text-sm">+ R$ ${f.amount.toFixed(2)}</span>
+                </div>
+            `).join('');
+
+            // Renderizar Saídas
+            document.getElementById('list-saidas').innerHTML = saidas.map(f => `
+                <div class="p-3.5 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <span class="text-gray-200 font-medium text-sm">${f.title}</span>
+                    <span class="font-bold text-rose-400 text-sm">- R$ ${f.amount.toFixed(2)}</span>
+                </div>
+            `).join('');
         }
 
         function openFinanceModal(type) {
@@ -784,52 +821,141 @@
             }
         }
 
-        // ROTINA, TREINO & RODA DA VIDA
+        // DESPEJO / DIÁRIO
+        function renderJournal() {
+            document.getElementById('journal-today-title').innerText = `Despejo Mental / Diário • Hoje (${new Date().toLocaleDateString('pt-BR')})`;
+            document.getElementById('journal-textarea').value = State.journalToday;
+
+            const historyContainer = document.getElementById('journal-history-list');
+            historyContainer.innerHTML = State.journalHistory.map(h => `
+                <div class="p-3 rounded-xl bg-dark-900 border border-gray-800">
+                    <span class="text-[10px] text-brand-accent font-bold block mb-1">${h.date}</span>
+                    <p class="text-xs text-gray-300 line-clamp-2">${h.text}</p>
+                </div>
+            `).join('');
+        }
+
+        function saveJournalToday() {
+            State.journalToday = document.getElementById('journal-textarea').value;
+            saveState();
+            alert("Diário de hoje salvo com sucesso!");
+            addXP(40);
+        }
+
+        // RODA DA VIDA INTERATIVA
+        function renderWheelSliders() {
+            const container = document.getElementById('wheel-sliders-container');
+            container.innerHTML = State.wheel.map((w, idx) => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-200 font-semibold text-sm">${w.area}</span>
+                        <span id="score-val-${idx}" class="text-brand-light font-bold">${w.score} / 10</span>
+                    </div>
+                    <input type="range" min="0" max="10" value="${w.score}" oninput="updateWheelScore(${idx}, this.value)" class="w-full accent-brand-primary cursor-pointer">
+                </div>
+            `).join('');
+        }
+
+        function updateWheelScore(idx, val) {
+            State.wheel[idx].score = parseInt(val);
+            document.getElementById(`score-val-${idx}`).innerText = `${val} / 10`;
+            saveState();
+        }
+
+        function saveWheelScores() {
+            alert("Roda da Vida atualizada com sucesso!");
+            addXP(50);
+        }
+
+        // OUTROS COMPONENTES
+        const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+        function changeMonth(direction) {
+            State.currentMonth += direction;
+            if (State.currentMonth > 11) { State.currentMonth = 0; State.currentYear++; }
+            if (State.currentMonth < 0) { State.currentMonth = 11; State.currentYear--; }
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            document.getElementById('calendar-month-year').innerText = `${monthNames[State.currentMonth]} de ${State.currentYear}`;
+            document.getElementById('current-month-label').innerText = monthNames[State.currentMonth];
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            const firstDayIndex = new Date(State.currentYear, State.currentMonth, 1).getDay();
+            const totalDays = new Date(State.currentYear, State.currentMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayIndex; i++) {
+                grid.insertAdjacentHTML('beforeend', `<div class="h-24 bg-dark-900/40 rounded-xl border border-gray-800/40 p-2 opacity-30"></div>`);
+            }
+            for (let day = 1; day <= totalDays; day++) {
+                grid.insertAdjacentHTML('beforeend', `
+                    <div class="h-24 bg-dark-800/70 rounded-xl border border-gray-700/50 p-2 flex flex-col justify-between">
+                        <span class="text-xs font-bold text-gray-300">${day}</span>
+                    </div>
+                `);
+            }
+        }
+
+        function renderSubjects() {
+            document.getElementById('subjects-tabs').innerHTML = State.subjects.map(sub => `
+                <button onclick="setActiveSubject(${sub.id})" class="px-4 py-2 rounded-xl text-xs font-bold transition-all ${sub.id === State.activeSubjectId ? 'bg-brand-primary text-white shadow-md' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}">
+                    ${sub.name}
+                </button>
+            `).join('');
+            const active = State.subjects.find(s => s.id === State.activeSubjectId);
+            if (active) {
+                document.getElementById('active-subject-title').innerText = active.name;
+                document.getElementById('subject-notes-textarea').value = active.notes;
+            }
+        }
+
+        function setActiveSubject(id) {
+            State.activeSubjectId = id;
+            renderSubjects();
+        }
+
+        function saveSubjectNotes() {
+            const active = State.subjects.find(s => s.id === State.activeSubjectId);
+            if (active) {
+                active.notes = document.getElementById('subject-notes-textarea').value;
+                saveState();
+                alert("Anotações salvas!");
+            }
+        }
+
+        function addSubjectModal() {
+            const name = prompt("Nome da matéria:");
+            if (name) {
+                State.subjects.push({ id: Date.now(), name, notes: '' });
+                saveState();
+                renderSubjects();
+            }
+        }
+
         function renderHabits() {
-            const container = document.getElementById('habits-list-container');
-            container.innerHTML = State.habits.map(h => `
+            document.getElementById('habits-list-container').innerHTML = State.habits.map(h => `
                 <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
                     <div class="flex items-center space-x-3">
                         <input type="checkbox" ${h.done ? 'checked' : ''} onchange="toggleHabit(${h.id})" class="w-5 h-5 rounded accent-brand-primary cursor-pointer">
                         <span class="${h.done ? 'line-through text-gray-500' : 'text-gray-200 font-medium'}">${h.title}</span>
                     </div>
-                    <span class="text-xs text-brand-primary font-semibold">${h.time}</span>
+                    <span class="text-xs text-brand-light font-semibold">${h.time}</span>
                 </div>
             `).join('');
         }
 
         function toggleHabit(id) {
-            const habit = State.habits.find(h => h.id === id);
-            if (habit) {
-                habit.done = !habit.done;
-                if (habit.done) addXP(50);
-                saveState();
-                renderAll();
-            }
+            const h = State.habits.find(x => x.id === id);
+            if (h) { h.done = !h.done; if (h.done) addXP(50); saveState(); renderHabits(); }
         }
 
         function renderWorkouts() {
-            const container = document.getElementById('workout-container');
-            container.innerHTML = State.workouts.map(w => `
+            document.getElementById('workout-container').innerHTML = State.workouts.map(w => `
                 <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50">
-                    <span class="text-xs text-brand-primary font-bold">${w.day}</span>
+                    <span class="text-xs text-brand-light font-bold">${w.day}</span>
                     <h4 class="text-white font-bold mt-1 mb-2">${w.focus}</h4>
                     <span class="text-xs text-gray-400">Status: ${w.status}</span>
-                </div>
-            `).join('');
-        }
-
-        function renderWheel() {
-            const container = document.getElementById('wheel-container');
-            container.innerHTML = State.wheel.map(w => `
-                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-gray-200 font-semibold text-sm">${w.area}</span>
-                        <span class="text-brand-primary font-bold">${w.score} / 10</span>
-                    </div>
-                    <div class="w-full bg-dark-900 rounded-full h-2">
-                        <div class="bg-brand-primary h-2 rounded-full" style="width: ${w.score * 10}%;"></div>
-                    </div>
                 </div>
             `).join('');
         }
@@ -838,7 +964,7 @@
             State.xp += amount;
             if (State.xp >= State.level * 500) {
                 State.level++;
-                alert(`Parabéns! Você evoluiu para o Nível ${State.level} como Executor Sênior!`);
+                alert(`Parabéns! Nível ${State.level} alcançado!`);
             }
             saveState();
             updateGamificationUI();
@@ -851,41 +977,21 @@
             document.getElementById('xp-bar').style.width = `${pct}%`;
         }
 
-        function addGtdItem() {
-            const input = document.getElementById('new-gtd-input');
-            if (!input.value.trim()) return;
-            const list = document.getElementById('gtd-inbox-list');
-            const div = document.createElement('div');
-            div.className = "p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm";
-            div.innerHTML = `<span class="text-gray-200">${input.value}</span><button class="text-xs text-brand-accent hover:underline font-semibold" onclick="this.parentElement.remove()">Processar</button>`;
-            list.prepend(div);
-            input.value = '';
-            addXP(20);
-        }
-
         function requestNotificationPermission() {
             if ("Notification" in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") new Notification("Segundo Cérebro Ativo", { body: "Notificações ativadas com sucesso!" });
-                });
-            }
-        }
-
-        function triggerWheelCheckin() {
-            const score = prompt("De 0 a 10, como você avalia sua energia e foco nesta semana?", "8");
-            if (score !== null) {
-                alert("Check-in semanal registrado! Continue mantendo a frequência.");
-                addXP(100);
+                Notification.requestPermission().then(p => { if (p === "granted") new Notification("Segundo Cérebro", { body: "Notificações ativadas!" }); });
             }
         }
 
         function addHabitPrompt() {
-            const title = prompt("Nome do novo hábito para sua rotina:");
-            if (title) {
-                State.habits.push({ id: Date.now(), title, done: false, time: '00:00' });
-                saveState();
-                renderAll();
-            }
+            const title = prompt("Novo hábito:");
+            if (title) { State.habits.push({ id: Date.now(), title, done: false, time: '00:00' }); saveState(); renderHabits(); }
+        }
+
+        function addEventModal() {
+            const title = prompt("Título do agendamento:");
+            const date = prompt("Data (AAAA-MM-DD):", "2026-10-30");
+            if (title && date) { State.agenda.push({ id: Date.now(), title, date, time: '14:00', type: 'Manual' }); saveState(); renderCalendar(); }
         }
 
         window.onload = function() {
@@ -895,3 +1001,5 @@
     </script>
 </body>
 </html>
+index.html
+Exibindo index.html.
