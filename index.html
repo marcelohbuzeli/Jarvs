@@ -38,7 +38,6 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .glow-effect { box-shadow: 0 0 25px rgba(99, 102, 241, 0.2); }
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #0B0F19; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
@@ -81,17 +80,21 @@
                     <i class="fa-solid fa-chart-pie w-5 text-center"></i>
                     <span>Dashboard & Circadiano</span>
                 </button>
+                <button onclick="switchTab('ia-chat')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="ia-chat">
+                    <i class="fa-solid fa-wand-magic-sparkles w-5 text-center text-indigo-400"></i>
+                    <span>Agente & Leitor de Fotos</span>
+                </button>
                 <button onclick="switchTab('rotina')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="rotina">
                     <i class="fa-solid fa-sun w-5 text-center"></i>
                     <span>Rotina & Hábitos</span>
                 </button>
                 <button onclick="switchTab('agenda')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="agenda">
                     <i class="fa-solid fa-calendar-days w-5 text-center"></i>
-                    <span>Agenda & Reuniões</span>
+                    <span>Calendário & Agenda</span>
                 </button>
                 <button onclick="switchTab('estudos')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="estudos">
                     <i class="fa-solid fa-graduation-cap w-5 text-center"></i>
-                    <span>Estudos & Faculdade</span>
+                    <span>Estudos & Unialfa</span>
                 </button>
                 <button onclick="switchTab('financeiro')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="financeiro">
                     <i class="fa-solid fa-wallet w-5 text-center"></i>
@@ -115,7 +118,7 @@
                 <span>Ativar Notificações Push</span>
             </button>
             <div class="mt-3 text-center text-[10px] text-gray-500">
-                Plassô Executive Core • v1.0 Local
+                Plassô Executive Core • v2.0 AI
             </div>
         </div>
     </aside>
@@ -134,9 +137,9 @@
                     <i class="fa-solid fa-clock text-brand-primary"></i>
                     <span id="live-clock" class="text-sm font-bold text-gray-200">00:00:00</span>
                 </div>
-                <button onclick="triggerDumpModal()" class="bg-brand-primary hover:bg-indigo-600 text-white font-semibold px-4 py-2.5 rounded-xl text-sm shadow-lg shadow-indigo-500/20 transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>Brain Dump Rápido</span>
+                <button onclick="switchTab('ia-chat')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2.5 rounded-xl text-sm shadow-lg shadow-indigo-500/25 transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Abrir Chat IA</span>
                 </button>
             </div>
         </header>
@@ -145,21 +148,20 @@
 
         <!-- TAB 1: DASHBOARD & CIRCADIANO -->
         <div id="tab-dashboard" class="tab-content space-y-6">
-            <!-- Circadian State Banner -->
             <div class="glass-card rounded-2xl p-6 relative overflow-hidden border border-indigo-500/20">
                 <div class="absolute right-0 top-0 translate-x-6 -translate-y-6 w-48 h-48 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold mb-3">
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-primary/15 text-brand-primary text-xs font-bold mb-3">
                             <i class="fa-solid fa-circle-nodes"></i>
-                            <span id="circadian-phase-title">Pico de Alta Performance Cognitiva</span>
+                            <span>Pico de Alta Performance Cognitiva</span>
                         </div>
                         <h3 class="text-xl font-bold text-white">Momento Ideal para Tarefas de Alta Complexidade (Plassô / Estratégia)</h3>
-                        <p class="text-sm text-gray-400 mt-1 max-w-2xl" id="circadian-desc">Seu córtex pré-frontal está no ápice de foco analítico. Aproveite para desenhar posicionamentos, campanhas ou focar em código/estratégia.</p>
+                        <p class="text-sm text-gray-400 mt-1 max-w-2xl">Seu córtex pré-frontal está no ápice de foco analítico. Aproveite para desenhar posicionamentos, campanhas ou focar em código/estratégia.</p>
                     </div>
                     <div class="bg-dark-800 p-4 rounded-xl border border-gray-700/60 text-center shrink-0">
                         <span class="text-xs text-gray-400 block mb-1">Energia Biológica</span>
-                        <span id="energy-level" class="text-2xl font-black text-emerald-400">92%</span>
+                        <span class="text-2xl font-black text-emerald-400">92%</span>
                     </div>
                 </div>
             </div>
@@ -171,7 +173,7 @@
                         <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Água Consumida</span>
                         <i class="fa-solid fa-droplet text-blue-400"></i>
                     </div>
-                    <div class="text-2xl font-black text-white" id="stat-water">1.5L <span class="text-xs font-normal text-gray-400">/ 3.0L</span></div>
+                    <div class="text-2xl font-black text-white">1.5L <span class="text-xs font-normal text-gray-400">/ 3.0L</span></div>
                     <div class="w-full bg-dark-900 rounded-full h-1.5 mt-3">
                         <div class="bg-blue-500 h-1.5 rounded-full" style="width: 50%;"></div>
                     </div>
@@ -181,7 +183,7 @@
                         <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Hábitos Concluídos</span>
                         <i class="fa-solid fa-check-double text-emerald-400"></i>
                     </div>
-                    <div class="text-2xl font-black text-white" id="stat-habits">4 <span class="text-xs font-normal text-gray-400">/ 6 hoje</span></div>
+                    <div class="text-2xl font-black text-white">4 <span class="text-xs font-normal text-gray-400">/ 6 hoje</span></div>
                     <div class="w-full bg-dark-900 rounded-full h-1.5 mt-3">
                         <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 66%;"></div>
                     </div>
@@ -204,7 +206,6 @@
                 </div>
             </div>
 
-            <!-- Focus & GTD Inbox Section -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-card p-6 rounded-2xl">
                     <h3 class="text-base font-bold text-white mb-4 flex items-center justify-between">
@@ -214,11 +215,7 @@
                     <div class="space-y-2.5 mb-4" id="gtd-inbox-list">
                         <div class="p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm">
                             <span class="text-gray-200">Ajustar roteiro de reels para cliente Rodeio 360</span>
-                            <button class="text-xs text-brand-accent hover:underline font-semibold">Processar</button>
-                        </div>
-                        <div class="p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm">
-                            <span class="text-gray-200">Revisar boleto de suprimentos da agência</span>
-                            <button class="text-xs text-brand-accent hover:underline font-semibold">Processar</button>
+                            <button class="text-xs text-brand-accent hover:underline font-semibold" onclick="this.parentElement.remove()">Processar</button>
                         </div>
                     </div>
                     <div class="flex gap-2">
@@ -242,10 +239,6 @@
                                 <i class="fa-solid fa-circle-check text-brand-accent mt-1"></i>
                                 <span><strong>Foco Profundo:</strong> Evite checar redes sociais nos primeiros 60 minutos do dia. Preserve sua dopamina.</span>
                             </li>
-                            <li class="flex items-start space-x-3">
-                                <i class="fa-solid fa-circle-check text-brand-accent mt-1"></i>
-                                <span><strong>Pausa Noturna:</strong> Desligar telas 45 minutos antes de dormir para garantir sono REM reparador.</span>
-                            </li>
                         </ul>
                     </div>
                     <div class="mt-6 pt-4 border-t border-gray-800 text-xs text-gray-400 flex justify-between items-center">
@@ -256,7 +249,59 @@
             </div>
         </div>
 
-        <!-- TAB 2: ROTINA & HÁBITOS -->
+        <!-- TAB 2: AGENTE & LEITOR DE FOTOS (CHAT IA INTeligente) -->
+        <div id="tab-ia-chat" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl flex flex-col h-[680px]">
+                <div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Segundo Cérebro • Assistente Inteligente</h3>
+                            <p class="text-xs text-gray-400">Envie prints, fotos de eventos, trabalhos ou documentos PDF/PPTX para interpretação automática.</p>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 bg-brand-primary/10 text-brand-primary text-xs font-semibold rounded-full">Modelo Core Ativo</span>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div id="chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">IA</div>
+                        <div class="bg-dark-800 border border-gray-700/60 p-4 rounded-2xl text-sm text-gray-200 max-w-xl">
+                            Olá, Marcelo! Estou pronto. Pode enviar um print, foto de evento, trabalho da faculdade ou arquivo. Vou interpretar e perguntar se deseja agendar na agenda ou transcrever na matéria correspondente!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attached Preview Banner -->
+                <div id="attachment-preview" class="hidden mb-3 p-3 bg-dark-800 border border-indigo-500/30 rounded-xl flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-file-image text-indigo-400 text-lg"></i>
+                        <div>
+                            <span id="attached-filename" class="text-xs font-bold text-white block">arquivo.png</span>
+                            <span class="text-[10px] text-gray-400">Pronto para processamento e extração</span>
+                        </div>
+                    </div>
+                    <button onclick="removeAttachment()" class="text-gray-400 hover:text-rose-400 text-xs"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <!-- Chat Input Bar -->
+                <div class="flex items-center space-x-3 pt-3 border-t border-gray-800">
+                    <label class="cursor-pointer bg-dark-700 hover:bg-dark-600 text-gray-300 p-3 rounded-xl border border-gray-700 transition-all flex items-center justify-center" title="Enviar Foto ou Arquivo">
+                        <i class="fa-solid fa-paperclip text-brand-primary"></i>
+                        <input type="file" id="file-upload-input" class="hidden" accept="image/*,.pdf,.pptx" onchange="handleFileSelect(event)">
+                    </label>
+                    <input type="text" id="chat-input" placeholder="Digite uma instrução ou envie um arquivo para análise..." class="flex-1 bg-dark-800 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-primary" onkeypress="if(event.key === 'Enter') sendChatMessage()">
+                    <button onclick="sendChatMessage()" class="bg-brand-primary hover:bg-indigo-600 text-white px-5 py-3 rounded-xl text-sm font-semibold shadow-lg shadow-indigo-500/20 transition-all">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ROTINA & HÁBITOS -->
         <div id="tab-rotina" class="tab-content hidden space-y-6">
             <div class="glass-card p-6 rounded-2xl">
                 <div class="flex justify-between items-center mb-6">
@@ -269,78 +314,111 @@
                         <span>Novo Hábito</span>
                     </button>
                 </div>
-                <div class="space-y-3" id="habits-list-container">
-                    <!-- Rendered via JS -->
-                </div>
+                <div class="space-y-3" id="habits-list-container"></div>
             </div>
         </div>
 
-        <!-- TAB 3: AGENDA & REUNIÕES -->
+        <!-- TAB 4: CALENDÁRIO & AGENDA -->
         <div id="tab-agenda" class="tab-content hidden space-y-6">
             <div class="glass-card p-6 rounded-2xl">
-                <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                     <div>
-                        <h3 class="text-lg font-bold text-white">Agenda Executiva & Compromissos</h3>
-                        <p class="text-sm text-gray-400">Gerencie reuniões, viagens, gravações e visitas.</p>
+                        <h3 id="calendar-month-year" class="text-xl font-bold text-white">Outubro de 2026</h3>
+                        <p class="text-sm text-gray-400">Visualização completa em calendário mensal.</p>
                     </div>
-                    <button onclick="addEventModal()" class="bg-brand-primary hover:bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all flex items-center space-x-2">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>Adicionar Evento</span>
-                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="flex bg-dark-800 rounded-xl border border-gray-700 overflow-hidden">
+                            <button onclick="changeMonth(-1)" class="px-3 py-2 text-gray-300 hover:bg-dark-700 text-xs font-bold"><i class="fa-solid fa-chevron-left"></i></button>
+                            <span class="px-4 py-2 text-xs font-bold text-white border-x border-gray-700 flex items-center" id="current-month-label">Outubro</span>
+                            <button onclick="changeMonth(1)" class="px-3 py-2 text-gray-300 hover:bg-dark-700 text-xs font-bold"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                        <button onclick="addEventModal()" class="bg-brand-primary hover:bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg shadow-indigo-500/25 transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Novo Agendamento</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="space-y-3" id="agenda-list-container">
-                    <!-- Rendered via JS -->
+
+                <!-- Calendar Grid Header -->
+                <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-gray-400 mb-2">
+                    <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
                 </div>
+
+                <!-- Calendar Days Grid -->
+                <div class="grid grid-cols-7 gap-2" id="calendar-grid">
+                    <!-- Gerado por JS -->
+                </div>
+            </div>
+
+            <!-- Lista de Eventos do Mês -->
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-base font-bold text-white mb-4">Compromissos Agendados</h3>
+                <div class="space-y-3" id="agenda-list-container"></div>
             </div>
         </div>
 
-        <!-- TAB 4: ESTUDOS & FACULDADE -->
+        <!-- TAB 5: ESTUDOS & FACULDADE (Com Sub-abas e Anotações) -->
         <div id="tab-estudos" class="tab-content hidden space-y-6">
             <div class="glass-card p-6 rounded-2xl">
-                <div class="flex justify-between items-center mb-6">
+                <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-800">
                     <div>
-                        <h3 class="text-lg font-bold text-white">Unialfa - Curso de Marketing</h3>
-                        <p class="text-sm text-gray-400">Acompanhamento de entregas, provas e cronograma acadêmico.</p>
+                        <h3 class="text-lg font-bold text-white">Unialfa • Curso de Marketing</h3>
+                        <p class="text-sm text-gray-400">Anotações por Matéria e Transcrições de PDFs/PPTXs</p>
                     </div>
-                    <button onclick="addStudyModal()" class="bg-brand-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl">Nova Atividade</button>
+                    <button onclick="addSubjectModal()" class="bg-dark-700 hover:bg-dark-600 text-white text-xs font-semibold px-3.5 py-2 rounded-xl border border-gray-700">
+                        <i class="fa-solid fa-plus text-brand-primary mr-1"></i> Nova Matéria
+                    </button>
                 </div>
-                <div class="space-y-3" id="study-list-container">
-                    <!-- Rendered via JS -->
+
+                <!-- Sub-abas de Matérias -->
+                <div class="flex flex-wrap gap-2 mb-6" id="subjects-tabs">
+                    <!-- Gerado via JS -->
+                </div>
+
+                <!-- Área de Anotações da Matéria Selecionada -->
+                <div class="bg-dark-800/80 border border-gray-700/50 rounded-2xl p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 id="active-subject-title" class="text-base font-bold text-white">Gestão Estratégica de Marcas</h4>
+                        <button onclick="saveSubjectNotes()" class="bg-brand-primary hover:bg-indigo-600 text-white text-xs font-semibold px-4 py-2 rounded-xl">Salvar Anotações</button>
+                    </div>
+                    <textarea id="subject-notes-textarea" rows="8" placeholder="Escreva suas anotações aqui ou use o Agente para transcrever conteúdos de PDFs e PPTXs..." class="w-full bg-dark-900 border border-gray-700 rounded-xl p-4 text-sm text-gray-200 focus:outline-none focus:border-brand-primary leading-relaxed"></textarea>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 5: FINANCEIRO & METAS (30K) -->
+        <!-- TAB 6: FINANCEIRO & METAS (30K) -->
         <div id="tab-financeiro" class="tab-content hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <div class="glass-card p-6 rounded-2xl border-l-4 border-brand-primary">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Meta de Faturamento (6 Meses)</span>
-                    <div class="text-2xl font-black text-white mt-1">R$ 3.000 <span class="text-xs text-gray-400 font-normal">➔ R$ 30.000</span></div>
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Meta Rumo aos R$ 30k (6 Meses)</span>
+                    <div class="text-2xl font-black text-white mt-1">R$ 5.200 <span class="text-xs text-gray-400 font-normal">/ R$ 30.000</span></div>
                     <div class="w-full bg-dark-900 rounded-full h-2 mt-4">
-                        <div class="bg-brand-primary h-2 rounded-full" style="width: 17%;"></div>
+                        <div class="bg-brand-primary h-2 rounded-full" style="width: 17.3%;"></div>
                     </div>
-                    <span class="text-xs text-gray-400 mt-2 inline-block">Mês Atual: R$ 5.200 (17.3% da meta final)</span>
+                    <span class="text-xs text-brand-accent font-semibold mt-2 inline-block">Faturamento Atual Plassô</span>
                 </div>
                 <div class="glass-card p-6 rounded-2xl border-l-4 border-emerald-400">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Entradas do Mês</span>
-                    <div class="text-2xl font-black text-emerald-400 mt-1">R$ 5.200,00</div>
-                    <span class="text-xs text-emerald-400 font-semibold mt-2 inline-block"><i class="fa-solid fa-arrow-trend-up"> +15% vs mês anterior</i></span>
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Total Entradas (Mês)</span>
+                    <div class="text-2xl font-black text-emerald-400 mt-1" id="total-entradas-val">R$ 5.200,00</div>
+                    <button onclick="openFinanceModal('Entrada')" class="mt-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-emerald-500/30 transition-all">
+                        <i class="fa-solid fa-plus mr-1"></i> Nova Entrada
+                    </button>
                 </div>
                 <div class="glass-card p-6 rounded-2xl border-l-4 border-rose-500">
-                    <span class="text-xs font-semibold text-gray-400 uppercase">Saídas & Despesas</span>
-                    <div class="text-2xl font-black text-rose-400 mt-1">R$ 1.850,00</div>
-                    <span class="text-xs text-gray-400 mt-2 inline-block">Vencimentos em dia (Palio & Ferramentas)</span>
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Total Saídas (Mês)</span>
+                    <div class="text-2xl font-black text-rose-400 mt-1" id="total-saidas-val">R$ 1.850,00</div>
+                    <button onclick="openFinanceModal('Saída')" class="mt-3 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-rose-500/30 transition-all">
+                        <i class="fa-solid fa-plus mr-1"></i> Nova Saída
+                    </button>
                 </div>
             </div>
             <div class="glass-card p-6 rounded-2xl">
-                <h3 class="text-lg font-bold text-white mb-4">Lançamentos Recentes & Metas Gamificadas</h3>
-                <div class="space-y-3" id="financial-list">
-                    <!-- Rendered via JS -->
-                </div>
+                <h3 class="text-lg font-bold text-white mb-4">Movimentações Financeiras</h3>
+                <div class="space-y-3" id="financial-list"></div>
             </div>
         </div>
 
-        <!-- TAB 6: TREINO (ARMS GYM) -->
+        <!-- TAB 7: TREINO (ARMS GYM) -->
         <div id="tab-treino" class="tab-content hidden space-y-6">
             <div class="glass-card p-6 rounded-2xl">
                 <div class="flex justify-between items-center mb-6">
@@ -350,13 +428,11 @@
                     </div>
                     <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full">Frequência: 5x na Semana</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="workout-container">
-                    <!-- Rendered via JS -->
-                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="workout-container"></div>
             </div>
         </div>
 
-        <!-- TAB 7: CRESCIMENTO & RODA DA VIDA -->
+        <!-- TAB 8: CRESCIMENTO & RODA DA VIDA -->
         <div id="tab-crescimento" class="tab-content hidden space-y-6">
             <div class="glass-card p-6 rounded-2xl">
                 <div class="flex justify-between items-center mb-6">
@@ -366,9 +442,7 @@
                     </div>
                     <button onclick="triggerWheelCheckin()" class="bg-brand-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl">Iniciar Teste Semanal</button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="wheel-container">
-                    <!-- Rendered via JS -->
-                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="wheel-container"></div>
             </div>
         </div>
 
@@ -376,10 +450,12 @@
 
     <!-- SCRIPT DE GERENCIAMENTO DO SISTEMA -->
     <script>
-        // ESTADO GLOBAL DO SISTEMA (Persistido via localStorage)
         const State = {
             xp: 1450,
             level: 3,
+            currentMonth: 9, // Outubro (0-indexado)
+            currentYear: 2026,
+            activeSubjectId: 1,
             habits: [
                 { id: 1, title: 'Beber 500ml de água ao acordar', done: true, time: '07:00' },
                 { id: 2, title: 'Leitura de desenvolvimento (15 min)', done: true, time: '08:00' },
@@ -387,16 +463,20 @@
                 { id: 4, title: 'Revisão das finanças e faturamento Plassô', done: false, time: '20:00' }
             ],
             agenda: [
-                { id: 1, title: 'Reunião estratégica Plassô', time: '14:30', type: 'Reunião' },
-                { id: 2, title: 'Gravação de conteúdo com Drone DJI Mini 4K', time: '16:30', type: 'Gravação' }
+                { id: 1, title: 'Reunião estratégica Plassô', date: '2026-10-15', time: '14:30', type: 'Reunião' },
+                { id: 2, title: 'Gravação de conteúdo com Drone DJI Mini 4K', date: '2026-10-18', time: '16:30', type: 'Gravação' },
+                { id: 3, title: 'Prova de Gestão na Unialfa', date: '2026-10-25', time: '19:00', type: 'Faculdade' }
             ],
-            studies: [
-                { id: 1, title: 'Entrega de Trabalho - Marketing Digital (Unialfa)', deadline: 'Até amanhã', status: 'Em andamento' },
-                { id: 2, title: 'Estudo para Prova de Gestão', deadline: 'Em 4 dias', status: 'Pendente' }
+            subjects: [
+                { id: 1, name: 'Gestão Estratégica de Marcas', notes: 'Anotações iniciais sobre posicionamento de mercado para a Plassô e clientes.' },
+                { id: 2, name: 'Marketing Digital Avançado', notes: 'Estudo sobre tráfego pago, funis de conversão e estratégias de lançamento.' },
+                { id: 3, name: 'Planejamento de Mídia', notes: 'Organização de calendários editoriais e métricas de desempenho.' }
             ],
             finances: [
-                { id: 1, title: 'Cliente Plassô (Contrato Mensal)', amount: '+R$ 2.500,00', type: 'Entrada' },
-                { id: 2, title: 'Manutenção Palio 1.0 Fire', amount: '-R$ 350,00', type: 'Saída' }
+                { id: 1, title: 'Cliente Plassô (Contrato Mensal)', amount: 2500.00, type: 'Entrada' },
+                { id: 2, title: 'Cliente Rodeio 360', amount: 2700.00, type: 'Entrada' },
+                { id: 3, title: 'Manutenção Palio 1.0 Fire', amount: 350.00, type: 'Saída' },
+                { id: 4, title: 'Suprimentos Agência', amount: 1500.00, type: 'Saída' }
             ],
             workouts: [
                 { day: 'Segunda-feira', focus: 'Membros Superiores (Peito / Tríceps)', status: 'Concluído' },
@@ -415,20 +495,20 @@
             ]
         };
 
-        // Salvar e carregar do localStorage
+        let tempAttachedFile = null;
+
         function saveState() {
-            localStorage.setItem('second_brain_state', JSON.stringify(State));
+            localStorage.setItem('second_brain_v2_state', JSON.stringify(State));
         }
 
         function loadState() {
-            const saved = localStorage.getItem('second_brain_state');
+            const saved = localStorage.getItem('second_brain_v2_state');
             if (saved) {
                 const parsed = JSON.parse(saved);
                 Object.assign(State, parsed);
             }
         }
 
-        // Navegação de Abas
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
@@ -442,13 +522,13 @@
                 }
             });
 
-            // Atualizar Títulos do Cabeçalho
             const titles = {
-                'dashboard': ['Dashboard & Ciclo Circadiano', 'Visão geral do seu estado cognitivo, bio-ritmo e tarefas críticas.'],
+                'dashboard': ['Dashboard & Ciclo Circadiano', 'Visão geral do seu estado cognitivo e bio-ritmo.'],
+                'ia-chat': ['Agente & Leitor de Mídia', 'Interpretação inteligente de prints, fotos, PDFs e PPTXs.'],
                 'rotina': ['Rotina & Hábitos Diários', 'Consistência mecânica para liberar espaço mental.'],
-                'agenda': ['Agenda & Compromissos', 'Reuniões, gravações, viagens e visitas.'],
-                'estudos': ['Estudos & Faculdade Unialfa', 'Cronograma acadêmico e entregas de provas.'],
-                'financeiro': ['Financeiro & Metas de Faturamento', 'Controle de entradas, saídas e rumo aos R$ 30k.'],
+                'agenda': ['Calendário & Agenda Executiva', 'Gerenciamento visual por calendário mensal.'],
+                'estudos': ['Estudos & Unialfa', 'Anotações por matéria e transcrição de arquivos.'],
+                'financeiro': ['Financeiro & Metas (30k)', 'Controle de entradas, saídas e faturamento rumo aos R$ 30k.'],
                 'treino': ['Treino ARMS Gym', 'Ordem dos exercícios, frequência e cargas.'],
                 'crescimento': ['Crescimento & Roda da Vida', 'Avaliação semanal e ajustes de alta performance.']
             };
@@ -458,23 +538,253 @@
             renderAll();
         }
 
-        // Relógio ao Vivo
         setInterval(() => {
-            const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString('pt-BR');
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('pt-BR');
         }, 1000);
 
-        // Renderização Dinâmica
         function renderAll() {
             renderHabits();
-            renderAgenda();
-            renderStudies();
+            renderCalendar();
+            renderAgendaList();
+            renderSubjects();
             renderFinances();
             renderWorkouts();
             renderWheel();
             updateGamificationUI();
         }
 
+        // CHAT IA & LEITOR DE FOTOS/ARQUIVOS
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                tempAttachedFile = file;
+                document.getElementById('attached-filename').innerText = file.name;
+                document.getElementById('attachment-preview').classList.remove('hidden');
+            }
+        }
+
+        function removeAttachment() {
+            tempAttachedFile = null;
+            document.getElementById('attachment-preview').classList.add('hidden');
+            document.getElementById('file-upload-input').value = '';
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text && !tempAttachedFile) return;
+
+            const chatMessages = document.getElementById('chat-messages');
+            
+            // User message bubble
+            let userHtml = `<div class="flex items-start justify-end space-x-3">
+                <div class="bg-brand-primary text-white p-4 rounded-2xl text-sm max-w-xl shadow-md">
+                    ${text ? `<p>${text}</p>` : ''}
+                    ${tempAttachedFile ? `<p class="text-xs mt-1 font-semibold text-indigo-100 flex items-center gap-1"><i class="fa-solid fa-paperclip"></i> ${tempAttachedFile.name}</p>` : ''}
+                </div>
+                <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-white text-xs font-bold shrink-0">EU</div>
+            </div>`;
+            chatMessages.insertAdjacentHTML('beforeend', userHtml);
+            input.value = '';
+
+            const attachedName = tempAttachedFile ? tempAttachedFile.name : '';
+            removeAttachment();
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simulação de Resposta Inteligente da IA
+            setTimeout(() => {
+                let aiReply = "Analisei sua solicitação com sucesso!";
+                let actionCard = "";
+
+                const lowerText = text.toLowerCase();
+                if (attachedName.match(/\.(pdf|pptx)$/i) || lowerText.includes('transcrever')) {
+                    aiReply = `Li o arquivo <strong>${attachedName || 'enviado'}</strong>. Identifiquei conteúdos cruciais de Marketing. Deseja que eu transcreva automaticamente na matéria selecionada ("Gestão Estratégica de Marcas")?`;
+                    actionCard = `<div class="mt-3 flex gap-2"><button onclick="executeAiAction('transcribe', '${attachedName}')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Sim, transcrever na matéria</button></div>`;
+                } else if (attachedName.match(/\.(png|jpg|jpeg)$/i) || lowerText.includes('reunião') || lowerText.includes('trabalho') || lowerText.includes('evento')) {
+                    aiReply = `Interpretei a imagem/print enviado. Identifiquei um evento potencial: <strong>"Reunião / Trabalho - Próxima Terça às 15:00"</strong>. Deseja que eu agende automaticamente na sua agenda?`;
+                    actionCard = `<div class="mt-3 flex gap-2"><button onclick="executeAiAction('schedule', 'Reunião/Trabalho Extraído')" class="bg-brand-primary hover:bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg">Sim, agendar no Calendário</button></div>`;
+                } else {
+                    aiReply = `Compreendi sua instrução. Processada com sucesso pelo seu Segundo Cérebro. Mais alguma demanda?`;
+                }
+
+                let aiHtml = `<div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">IA</div>
+                    <div class="bg-dark-800 border border-gray-700/60 p-4 rounded-2xl text-sm text-gray-200 max-w-xl shadow-md">
+                        <p>${aiReply}</p>
+                        ${actionCard}
+                    </div>
+                </div>`;
+                chatMessages.insertAdjacentHTML('beforeend', aiHtml);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                addXP(25);
+            }, 800);
+        }
+
+        function executeAiAction(actionType, detail) {
+            if (actionType === 'schedule') {
+                State.agenda.push({ id: Date.now(), title: detail, date: '2026-10-28', time: '15:00', type: 'Inteligente' });
+                saveState();
+                renderCalendar();
+                renderAgendaList();
+                alert("Evento agendado com sucesso no seu Calendário!");
+            } else if (actionType === 'transcribe') {
+                const sub = State.subjects.find(s => s.id === State.activeSubjectId);
+                if (sub) {
+                    sub.notes += `\n\n[Transcrição Automática de ${detail}]: Conceitos fundamentais de estratégias de posicionamento, análise de concorrentes e diferenciação de marca.`;
+                    saveState();
+                    renderSubjects();
+                    alert(`Conteúdo transcrito com sucesso para a matéria ${sub.name}!`);
+                }
+            }
+        }
+
+        // CALENDÁRIO & AGENDA
+        const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+        function changeMonth(direction) {
+            State.currentMonth += direction;
+            if (State.currentMonth > 11) { State.currentMonth = 0; State.currentYear++; }
+            if (State.currentMonth < 0) { State.currentMonth = 11; State.currentYear--; }
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            document.getElementById('calendar-month-year').innerText = `${monthNames[State.currentMonth]} de ${State.currentYear}`;
+            document.getElementById('current-month-label').innerText = monthNames[State.currentMonth];
+
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+
+            const firstDayIndex = new Date(State.currentYear, State.currentMonth, 1).getDay();
+            const totalDays = new Date(State.currentYear, State.currentMonth + 1, 0).getDate();
+
+            // Dias vazios do mês anterior
+            for (let i = 0; i < firstDayIndex; i++) {
+                grid.insertAdjacentHTML('beforeend', `<div class="h-24 bg-dark-900/40 rounded-xl border border-gray-800/40 p-2 opacity-30"></div>`);
+            }
+
+            // Dias do mês atual
+            for (let day = 1; day <= totalDays; day++) {
+                const formattedMonth = String(State.currentMonth + 1).padStart(2, '0');
+                const formattedDay = String(day).padStart(2, '0');
+                const dateStr = `${State.currentYear}-${formattedMonth}-${formattedDay}`;
+
+                const dayEvents = State.agenda.filter(ev => ev.date === dateStr);
+                const isToday = (day === 28 && State.currentMonth === 9 && State.currentYear === 2026);
+
+                let eventsHtml = dayEvents.map(ev => `<span class="block text-[10px] bg-brand-primary/20 text-indigo-300 px-1.5 py-0.5 rounded truncate font-medium mt-1">${ev.time} - ${ev.title}</span>`).join('');
+
+                grid.insertAdjacentHTML('beforeend', `
+                    <div class="h-24 bg-dark-800/70 rounded-xl border ${isToday ? 'border-brand-primary shadow-lg shadow-indigo-500/10' : 'border-gray-700/50'} p-2 flex flex-col justify-between overflow-y-auto">
+                        <span class="text-xs font-bold ${isToday ? 'text-brand-primary bg-brand-primary/10 px-1.5 py-0.5 rounded-full w-fit' : 'text-gray-300'}">${day}</span>
+                        <div class="space-y-1">${eventsHtml}</div>
+                    </div>
+                `);
+            }
+        }
+
+        function renderAgendaList() {
+            const container = document.getElementById('agenda-list-container');
+            container.innerHTML = State.agenda.map(a => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs px-2 py-0.5 rounded bg-brand-primary/10 text-brand-primary font-bold">${a.type}</span>
+                            <span class="text-xs text-gray-400">${a.date}</span>
+                        </div>
+                        <h4 class="text-white font-semibold mt-1">${a.title}</h4>
+                    </div>
+                    <span class="text-sm font-bold text-gray-300">${a.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function addEventModal() {
+            const title = prompt("Título do evento, reunião ou trabalho:");
+            const date = prompt("Data (AAAA-MM-DD):", "2026-10-30");
+            const time = prompt("Horário (HH:MM):", "14:00");
+            if (title && date) {
+                State.agenda.push({ id: Date.now(), title, date, time, type: 'Manual' });
+                saveState();
+                renderCalendar();
+                renderAgendaList();
+                addXP(30);
+            }
+        }
+
+        // ESTUDOS & UNIALFA
+        function renderSubjects() {
+            const tabsContainer = document.getElementById('subjects-tabs');
+            tabsContainer.innerHTML = State.subjects.map(sub => `
+                <button onclick="setActiveSubject(${sub.id})" class="px-4 py-2 rounded-xl text-xs font-bold transition-all ${sub.id === State.activeSubjectId ? 'bg-brand-primary text-white shadow-md shadow-indigo-500/20' : 'bg-dark-700 text-gray-300 hover:bg-dark-600'}">
+                    ${sub.name}
+                </button>
+            `).join('');
+
+            const activeSub = State.subjects.find(s => s.id === State.activeSubjectId);
+            if (activeSub) {
+                document.getElementById('active-subject-title').innerText = activeSub.name;
+                document.getElementById('subject-notes-textarea').value = activeSub.notes;
+            }
+        }
+
+        function setActiveSubject(id) {
+            State.activeSubjectId = id;
+            renderSubjects();
+        }
+
+        function saveSubjectNotes() {
+            const activeSub = State.subjects.find(s => s.id === State.activeSubjectId);
+            if (activeSub) {
+                activeSub.notes = document.getElementById('subject-notes-textarea').value;
+                saveState();
+                alert("Anotações salvas com sucesso!");
+                addXP(20);
+            }
+        }
+
+        function addSubjectModal() {
+            const name = prompt("Nome da nova matéria da Unialfa:");
+            if (name) {
+                State.subjects.push({ id: Date.now(), name, notes: 'Novas anotações...' });
+                saveState();
+                renderSubjects();
+            }
+        }
+
+        // FINANCEIRO & METAS
+        function renderFinances() {
+            const container = document.getElementById('financial-list');
+            container.innerHTML = State.finances.map(f => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs px-2 py-0.5 rounded ${f.type === 'Entrada' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'} font-bold">${f.type}</span>
+                        <h4 class="text-gray-200 font-medium mt-1">${f.title}</h4>
+                    </div>
+                    <span class="font-black text-base ${f.type === 'Entrada' ? 'text-emerald-400' : 'text-rose-400'}">R$ ${f.amount.toFixed(2)}</span>
+                </div>
+            `).join('');
+
+            const totalEntradas = State.finances.filter(f => f.type === 'Entrada').reduce((acc, curr) => acc + curr.amount, 0);
+            const totalSaidas = State.finances.filter(f => f.type === 'Saída').reduce((acc, curr) => acc + curr.amount, 0);
+
+            document.getElementById('total-entradas-val').innerText = `R$ ${totalEntradas.toFixed(2)}`;
+            document.getElementById('total-saidas-val').innerText = `R$ ${totalSaidas.toFixed(2)}`;
+        }
+
+        function openFinanceModal(type) {
+            const title = prompt(`Descrição da ${type}:`);
+            const amountStr = prompt(`Valor da ${type} (ex: 1500.00):`);
+            const amount = parseFloat(amountStr);
+            if (title && !isNaN(amount)) {
+                State.finances.push({ id: Date.now(), title, amount, type });
+                saveState();
+                renderFinances();
+                addXP(30);
+            }
+        }
+
+        // ROTINA, TREINO & RODA DA VIDA
         function renderHabits() {
             const container = document.getElementById('habits-list-container');
             container.innerHTML = State.habits.map(h => `
@@ -496,42 +806,6 @@
                 saveState();
                 renderAll();
             }
-        }
-
-        function renderAgenda() {
-            const container = document.getElementById('agenda-list-container');
-            container.innerHTML = State.agenda.map(a => `
-                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
-                    <div>
-                        <span class="text-xs px-2 py-0.5 rounded bg-brand-primary/10 text-brand-primary font-bold">${a.type}</span>
-                        <h4 class="text-white font-semibold mt-1">${a.title}</h4>
-                    </div>
-                    <span class="text-sm font-bold text-gray-300">${a.time}</span>
-                </div>
-            `).join('');
-        }
-
-        function renderStudies() {
-            const container = document.getElementById('study-list-container');
-            container.innerHTML = State.studies.map(s => `
-                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
-                    <div>
-                        <h4 class="text-white font-semibold">${s.title}</h4>
-                        <span class="text-xs text-amber-400 font-medium">Prazo: ${s.deadline}</span>
-                    </div>
-                    <span class="text-xs px-3 py-1 rounded-full bg-dark-700 text-gray-300 font-semibold">${s.status}</span>
-                </div>
-            `).join('');
-        }
-
-        function renderFinances() {
-            const container = document.getElementById('financial-list');
-            container.innerHTML = State.finances.map(f => `
-                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
-                    <span class="text-gray-200 font-medium">${f.title}</span>
-                    <span class="font-bold ${f.type === 'Entrada' ? 'text-emerald-400' : 'text-rose-400'}">${f.amount}</span>
-                </div>
-            `).join('');
         }
 
         function renderWorkouts() {
@@ -577,7 +851,6 @@
             document.getElementById('xp-bar').style.width = `${pct}%`;
         }
 
-        // Funções de Interação e GTD
         function addGtdItem() {
             const input = document.getElementById('new-gtd-input');
             if (!input.value.trim()) return;
@@ -591,15 +864,11 @@
         }
 
         function requestNotificationPermission() {
-            if (!("Notification" in window)) {
-                alert("Este navegador não suporta notificações.");
-                return;
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") new Notification("Segundo Cérebro Ativo", { body: "Notificações ativadas com sucesso!" });
+                });
             }
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    new Notification("Segundo Cérebro Ativo", { body: "Notificações ativadas com sucesso! Sua rotina será mantida rigorosamente." });
-                }
-            });
         }
 
         function triggerWheelCheckin() {
@@ -619,43 +888,6 @@
             }
         }
 
-        function addEventModal() {
-            const title = prompt("Nome do evento/reunião:");
-            const time = prompt("Horário (ex: 15:00):", "14:00");
-            if (title) {
-                State.agenda.push({ id: Date.now(), title, time, type: 'Agenda' });
-                saveState();
-                renderAll();
-            }
-        }
-
-        function addStudyModal() {
-            const title = prompt("Título da atividade/prova na Unialfa:");
-            if (title) {
-                State.studies.push({ id: Date.now(), title, deadline: 'Próxima semana', status: 'Pendente' });
-                saveState();
-                renderAll();
-            }
-        }
-
-        function triggerDumpModal() {
-            const thought = prompt("Brain Dump Rápido: O que está ocupando sua mente agora?");
-            if (thought) {
-                addGtdItemExternal(thought);
-                addXP(30);
-                alert("Pensamento capturado e retirado do seu cérebro biológico!");
-            }
-        }
-
-        function addGtdItemExternal(text) {
-            const list = document.getElementById('gtd-inbox-list');
-            const div = document.createElement('div');
-            div.className = "p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm";
-            div.innerHTML = `<span class="text-gray-200">${text}</span><button class="text-xs text-brand-accent hover:underline font-semibold" onclick="this.parentElement.remove()">Processar</button>`;
-            list.prepend(div);
-        }
-
-        // Inicialização
         window.onload = function() {
             loadState();
             renderAll();
@@ -663,3 +895,5 @@
     </script>
 </body>
 </html>
+index.html
+Exibindo index.html.
