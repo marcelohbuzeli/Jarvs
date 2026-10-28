@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segundo Cérebro | Executive Core</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0B0F19',
+                            800: '#111827',
+                            700: '#1F2937',
+                            600: '#374151',
+                        },
+                        brand: {
+                            primary: '#6366F1',
+                            accent: '#10B981',
+                            warning: '#F59E0B',
+                            danger: '#EF4444',
+                            glow: 'rgba(99, 102, 241, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card { background: rgba(17, 24, 39, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glow-effect { box-shadow: 0 0 25px rgba(99, 102, 241, 0.2); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0B0F19; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4B5563; }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-100 min-h-screen flex flex-col md:flex-row antialiased selection:bg-brand-primary selection:text-white">
+
+    <!-- SIDEBAR / NAVIGATION -->
+    <aside class="w-full md:w-72 bg-dark-800 border-r border-gray-800 flex flex-col justify-between shrink-0 z-20">
+        <div>
+            <!-- Logo & User Profile -->
+            <div class="p-6 border-b border-gray-800">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-primary to-indigo-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                        <i class="fa-solid fa-brain text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-base tracking-tight text-white">Segundo Cérebro</h1>
+                        <span class="text-xs text-brand-accent font-medium flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span> Sistema Ativo
+                        </span>
+                    </div>
+                </div>
+                <!-- Gamification Status Bar -->
+                <div class="bg-dark-700/60 rounded-xl p-3 border border-gray-700/50">
+                    <div class="flex justify-between text-xs mb-1">
+                        <span class="text-gray-400 font-medium">Nível <span id="user-level" class="text-white font-bold">3</span> (Core Executive)</span>
+                        <span id="user-xp" class="text-brand-primary font-bold">1.450 / 2.000 XP</span>
+                    </div>
+                    <div class="w-full bg-dark-900 rounded-full h-2 overflow-hidden">
+                        <div id="xp-bar" class="bg-gradient-to-r from-brand-primary to-emerald-400 h-2 rounded-full transition-all duration-500" style="width: 72%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="p-4 space-y-1.5" id="nav-tabs">
+                <button onclick="switchTab('dashboard')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all bg-brand-primary text-white shadow-lg shadow-brand-primary/20" data-target="dashboard">
+                    <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+                    <span>Dashboard & Circadiano</span>
+                </button>
+                <button onclick="switchTab('rotina')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="rotina">
+                    <i class="fa-solid fa-sun w-5 text-center"></i>
+                    <span>Rotina & Hábitos</span>
+                </button>
+                <button onclick="switchTab('agenda')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="agenda">
+                    <i class="fa-solid fa-calendar-days w-5 text-center"></i>
+                    <span>Agenda & Reuniões</span>
+                </button>
+                <button onclick="switchTab('estudos')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="estudos">
+                    <i class="fa-solid fa-graduation-cap w-5 text-center"></i>
+                    <span>Estudos & Faculdade</span>
+                </button>
+                <button onclick="switchTab('financeiro')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="financeiro">
+                    <i class="fa-solid fa-wallet w-5 text-center"></i>
+                    <span>Financeiro & Metas (30k)</span>
+                </button>
+                <button onclick="switchTab('treino')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="treino">
+                    <i class="fa-solid fa-dumbbell w-5 text-center"></i>
+                    <span>Treino (ARMS Gym)</span>
+                </button>
+                <button onclick="switchTab('crescimento')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-dark-700/50" data-target="crescimento">
+                    <i class="fa-solid fa-compass w-5 text-center"></i>
+                    <span>Crescimento & Roda da Vida</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Sidebar Footer / Notification Trigger -->
+        <div class="p-4 border-t border-gray-800">
+            <button onclick="requestNotificationPermission()" class="w-full bg-dark-700 hover:bg-dark-600 text-gray-300 text-xs font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center justify-center space-x-2 border border-gray-700">
+                <i class="fa-solid fa-bell text-brand-primary"></i>
+                <span>Ativar Notificações Push</span>
+            </button>
+            <div class="mt-3 text-center text-[10px] text-gray-500">
+                Plassô Executive Core • v1.0 Local
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 p-6 md:p-10 overflow-y-auto max-h-screen">
+        
+        <!-- TOP HEADER BAR -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 mb-8 border-b border-gray-800 gap-4">
+            <div>
+                <h2 id="page-title" class="text-2xl font-extrabold text-white tracking-tight">Dashboard & Ciclo Circadiano</h2>
+                <p id="page-subtitle" class="text-sm text-gray-400 mt-0.5">Visão geral do seu estado cognitivo, bio-ritmo e tarefas críticas do dia.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="glass-card px-4 py-2 rounded-xl flex items-center space-x-3">
+                    <i class="fa-solid fa-clock text-brand-primary"></i>
+                    <span id="live-clock" class="text-sm font-bold text-gray-200">00:00:00</span>
+                </div>
+                <button onclick="triggerDumpModal()" class="bg-brand-primary hover:bg-indigo-600 text-white font-semibold px-4 py-2.5 rounded-xl text-sm shadow-lg shadow-indigo-500/20 transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Brain Dump Rápido</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ================= TABS CONTAINER ================= -->
+
+        <!-- TAB 1: DASHBOARD & CIRCADIANO -->
+        <div id="tab-dashboard" class="tab-content space-y-6">
+            <!-- Circadian State Banner -->
+            <div class="glass-card rounded-2xl p-6 relative overflow-hidden border border-indigo-500/20">
+                <div class="absolute right-0 top-0 translate-x-6 -translate-y-6 w-48 h-48 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold mb-3">
+                            <i class="fa-solid fa-circle-nodes"></i>
+                            <span id="circadian-phase-title">Pico de Alta Performance Cognitiva</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Momento Ideal para Tarefas de Alta Complexidade (Plassô / Estratégia)</h3>
+                        <p class="text-sm text-gray-400 mt-1 max-w-2xl" id="circadian-desc">Seu córtex pré-frontal está no ápice de foco analítico. Aproveite para desenhar posicionamentos, campanhas ou focar em código/estratégia.</p>
+                    </div>
+                    <div class="bg-dark-800 p-4 rounded-xl border border-gray-700/60 text-center shrink-0">
+                        <span class="text-xs text-gray-400 block mb-1">Energia Biológica</span>
+                        <span id="energy-level" class="text-2xl font-black text-emerald-400">92%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="glass-card p-5 rounded-2xl">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Água Consumida</span>
+                        <i class="fa-solid fa-droplet text-blue-400"></i>
+                    </div>
+                    <div class="text-2xl font-black text-white" id="stat-water">1.5L <span class="text-xs font-normal text-gray-400">/ 3.0L</span></div>
+                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-3">
+                        <div class="bg-blue-500 h-1.5 rounded-full" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Hábitos Concluídos</span>
+                        <i class="fa-solid fa-check-double text-emerald-400"></i>
+                    </div>
+                    <div class="text-2xl font-black text-white" id="stat-habits">4 <span class="text-xs font-normal text-gray-400">/ 6 hoje</span></div>
+                    <div class="w-full bg-dark-900 rounded-full h-1.5 mt-3">
+                        <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 66%;"></div>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-2xl">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Faturamento Atual</span>
+                        <i class="fa-solid fa-chart-line text-amber-400"></i>
+                    </div>
+                    <div class="text-2xl font-black text-white">R$ 5.200</div>
+                    <span class="text-xs text-brand-accent font-semibold mt-1 inline-block">Meta Mês: R$ 8.000</span>
+                </div>
+                <div class="glass-card p-5 rounded-2xl">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Próximo Evento</span>
+                        <i class="fa-solid fa-calendar-check text-indigo-400"></i>
+                    </div>
+                    <div class="text-lg font-bold text-white truncate">Reunião Plassô</div>
+                    <span class="text-xs text-gray-400 mt-1 inline-block">Hoje, 14:30</span>
+                </div>
+            </div>
+
+            <!-- Focus & GTD Inbox Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-base font-bold text-white mb-4 flex items-center justify-between">
+                        <span><i class="fa-solid fa-list-check text-brand-primary mr-2"></i> Caixa de Entrada (GTD Inbox)</span>
+                        <span class="text-xs text-gray-400 font-normal">Cérebro descarregado</span>
+                    </h3>
+                    <div class="space-y-2.5 mb-4" id="gtd-inbox-list">
+                        <div class="p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm">
+                            <span class="text-gray-200">Ajustar roteiro de reels para cliente Rodeio 360</span>
+                            <button class="text-xs text-brand-accent hover:underline font-semibold">Processar</button>
+                        </div>
+                        <div class="p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm">
+                            <span class="text-gray-200">Revisar boleto de suprimentos da agência</span>
+                            <button class="text-xs text-brand-accent hover:underline font-semibold">Processar</button>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" id="new-gtd-input" placeholder="Despeje qualquer pensamento aqui..." class="flex-1 bg-dark-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-primary">
+                        <button onclick="addGtdItem()" class="bg-brand-primary text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-600 transition-all">Capturar</button>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-4 flex items-center space-x-2">
+                            <i class="fa-solid fa-shield-heart text-emerald-400"></i>
+                            <span>Regulador Circadiano & Conselhos do Core</span>
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start space-x-3">
+                                <i class="fa-solid fa-circle-check text-brand-accent mt-1"></i>
+                                <span><strong>Hidratação:</strong> Ingerir 500ml de água logo após acordar para despertar o sistema nervoso.</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fa-solid fa-circle-check text-brand-accent mt-1"></i>
+                                <span><strong>Foco Profundo:</strong> Evite checar redes sociais nos primeiros 60 minutos do dia. Preserve sua dopamina.</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fa-solid fa-circle-check text-brand-accent mt-1"></i>
+                                <span><strong>Pausa Noturna:</strong> Desligar telas 45 minutos antes de dormir para garantir sono REM reparador.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-800 text-xs text-gray-400 flex justify-between items-center">
+                        <span>Status do Sistema: Sincronizado</span>
+                        <span class="text-brand-accent font-semibold">Próximo ciclo em 45 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: ROTINA & HÁBITOS -->
+        <div id="tab-rotina" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Rotina Diária & Hábitos de Alta Performance</h3>
+                        <p class="text-sm text-gray-400">Mantenha a consistência mecânica para liberar espaço mental.</p>
+                    </div>
+                    <button onclick="addHabitPrompt()" class="bg-dark-700 hover:bg-dark-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl border border-gray-700 transition-all flex items-center space-x-2">
+                        <i class="fa-solid fa-plus text-brand-primary"></i>
+                        <span>Novo Hábito</span>
+                    </button>
+                </div>
+                <div class="space-y-3" id="habits-list-container">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: AGENDA & REUNIÕES -->
+        <div id="tab-agenda" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Agenda Executiva & Compromissos</h3>
+                        <p class="text-sm text-gray-400">Gerencie reuniões, viagens, gravações e visitas.</p>
+                    </div>
+                    <button onclick="addEventModal()" class="bg-brand-primary hover:bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all flex items-center space-x-2">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Adicionar Evento</span>
+                    </button>
+                </div>
+                <div class="space-y-3" id="agenda-list-container">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: ESTUDOS & FACULDADE -->
+        <div id="tab-estudos" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Unialfa - Curso de Marketing</h3>
+                        <p class="text-sm text-gray-400">Acompanhamento de entregas, provas e cronograma acadêmico.</p>
+                    </div>
+                    <button onclick="addStudyModal()" class="bg-brand-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl">Nova Atividade</button>
+                </div>
+                <div class="space-y-3" id="study-list-container">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: FINANCEIRO & METAS (30K) -->
+        <div id="tab-financeiro" class="tab-content hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-brand-primary">
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Meta de Faturamento (6 Meses)</span>
+                    <div class="text-2xl font-black text-white mt-1">R$ 3.000 <span class="text-xs text-gray-400 font-normal">➔ R$ 30.000</span></div>
+                    <div class="w-full bg-dark-900 rounded-full h-2 mt-4">
+                        <div class="bg-brand-primary h-2 rounded-full" style="width: 17%;"></div>
+                    </div>
+                    <span class="text-xs text-gray-400 mt-2 inline-block">Mês Atual: R$ 5.200 (17.3% da meta final)</span>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-emerald-400">
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Entradas do Mês</span>
+                    <div class="text-2xl font-black text-emerald-400 mt-1">R$ 5.200,00</div>
+                    <span class="text-xs text-emerald-400 font-semibold mt-2 inline-block"><i class="fa-solid fa-arrow-trend-up"> +15% vs mês anterior</i></span>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border-l-4 border-rose-500">
+                    <span class="text-xs font-semibold text-gray-400 uppercase">Saídas & Despesas</span>
+                    <div class="text-2xl font-black text-rose-400 mt-1">R$ 1.850,00</div>
+                    <span class="text-xs text-gray-400 mt-2 inline-block">Vencimentos em dia (Palio & Ferramentas)</span>
+                </div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="text-lg font-bold text-white mb-4">Lançamentos Recentes & Metas Gamificadas</h3>
+                <div class="space-y-3" id="financial-list">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: TREINO (ARMS GYM) -->
+        <div id="tab-treino" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Cronograma de Treino (ARMS Gym - Umuarama)</h3>
+                        <p class="text-sm text-gray-400">Frequência, ordem dos exercícios e cargas progressivas.</p>
+                    </div>
+                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full">Frequência: 5x na Semana</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="workout-container">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 7: CRESCIMENTO & RODA DA VIDA -->
+        <div id="tab-crescimento" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Roda da Vida & Teste Semanal de Crescimento</h3>
+                        <p class="text-sm text-gray-400">Auto-avaliação semanal para reequilibrar áreas da sua vida profissional e pessoal.</p>
+                    </div>
+                    <button onclick="triggerWheelCheckin()" class="bg-brand-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl">Iniciar Teste Semanal</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="wheel-container">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DE GERENCIAMENTO DO SISTEMA -->
+    <script>
+        // ESTADO GLOBAL DO SISTEMA (Persistido via localStorage)
+        const State = {
+            xp: 1450,
+            level: 3,
+            habits: [
+                { id: 1, title: 'Beber 500ml de água ao acordar', done: true, time: '07:00' },
+                { id: 2, title: 'Leitura de desenvolvimento (15 min)', done: true, time: '08:00' },
+                { id: 3, title: 'Treino na ARMS Gym', done: false, time: '18:00' },
+                { id: 4, title: 'Revisão das finanças e faturamento Plassô', done: false, time: '20:00' }
+            ],
+            agenda: [
+                { id: 1, title: 'Reunião estratégica Plassô', time: '14:30', type: 'Reunião' },
+                { id: 2, title: 'Gravação de conteúdo com Drone DJI Mini 4K', time: '16:30', type: 'Gravação' }
+            ],
+            studies: [
+                { id: 1, title: 'Entrega de Trabalho - Marketing Digital (Unialfa)', deadline: 'Até amanhã', status: 'Em andamento' },
+                { id: 2, title: 'Estudo para Prova de Gestão', deadline: 'Em 4 dias', status: 'Pendente' }
+            ],
+            finances: [
+                { id: 1, title: 'Cliente Plassô (Contrato Mensal)', amount: '+R$ 2.500,00', type: 'Entrada' },
+                { id: 2, title: 'Manutenção Palio 1.0 Fire', amount: '-R$ 350,00', type: 'Saída' }
+            ],
+            workouts: [
+                { day: 'Segunda-feira', focus: 'Membros Superiores (Peito / Tríceps)', status: 'Concluído' },
+                { day: 'Terça-feira', focus: 'Membros Inferiores (Quadríceps / Panturrilha)', status: 'Concluído' },
+                { day: 'Quarta-feira', focus: 'Costas / Bíceps / Core', status: 'Pendente' },
+                { day: 'Quinta-feira', focus: 'Ombros / Trapézio', status: 'Pendente' },
+                { day: 'Sexta-feira', focus: 'Full Body & Condicionamento', status: 'Pendente' }
+            ],
+            wheel: [
+                { area: 'Carreira & Negócios (Plassô)', score: 8 },
+                { area: 'Saúde & Vitalidade (Treino/Dieta)', score: 7 },
+                { area: 'Finanças & Riqueza', score: 6 },
+                { area: 'Estudos & Conhecimento', score: 8 },
+                { area: 'Desenvolvimento Pessoal', score: 7 },
+                { area: 'Lazer & Descanso', score: 5 }
+            ]
+        };
+
+        // Salvar e carregar do localStorage
+        function saveState() {
+            localStorage.setItem('second_brain_state', JSON.stringify(State));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('second_brain_state');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                Object.assign(State, parsed);
+            }
+        }
+
+        // Navegação de Abas
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-brand-primary/20');
+                btn.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-dark-700/50');
+                if (btn.dataset.target === tabId) {
+                    btn.classList.add('bg-brand-primary', 'text-white', 'shadow-lg', 'shadow-brand-primary/20');
+                    btn.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-dark-700/50');
+                }
+            });
+
+            // Atualizar Títulos do Cabeçalho
+            const titles = {
+                'dashboard': ['Dashboard & Ciclo Circadiano', 'Visão geral do seu estado cognitivo, bio-ritmo e tarefas críticas.'],
+                'rotina': ['Rotina & Hábitos Diários', 'Consistência mecânica para liberar espaço mental.'],
+                'agenda': ['Agenda & Compromissos', 'Reuniões, gravações, viagens e visitas.'],
+                'estudos': ['Estudos & Faculdade Unialfa', 'Cronograma acadêmico e entregas de provas.'],
+                'financeiro': ['Financeiro & Metas de Faturamento', 'Controle de entradas, saídas e rumo aos R$ 30k.'],
+                'treino': ['Treino ARMS Gym', 'Ordem dos exercícios, frequência e cargas.'],
+                'crescimento': ['Crescimento & Roda da Vida', 'Avaliação semanal e ajustes de alta performance.']
+            };
+
+            document.getElementById('page-title').innerText = titles[tabId][0];
+            document.getElementById('page-subtitle').innerText = titles[tabId][1];
+            renderAll();
+        }
+
+        // Relógio ao Vivo
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString('pt-BR');
+        }, 1000);
+
+        // Renderização Dinâmica
+        function renderAll() {
+            renderHabits();
+            renderAgenda();
+            renderStudies();
+            renderFinances();
+            renderWorkouts();
+            renderWheel();
+            updateGamificationUI();
+        }
+
+        function renderHabits() {
+            const container = document.getElementById('habits-list-container');
+            container.innerHTML = State.habits.map(h => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" ${h.done ? 'checked' : ''} onchange="toggleHabit(${h.id})" class="w-5 h-5 rounded accent-brand-primary cursor-pointer">
+                        <span class="${h.done ? 'line-through text-gray-500' : 'text-gray-200 font-medium'}">${h.title}</span>
+                    </div>
+                    <span class="text-xs text-brand-primary font-semibold">${h.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function toggleHabit(id) {
+            const habit = State.habits.find(h => h.id === id);
+            if (habit) {
+                habit.done = !habit.done;
+                if (habit.done) addXP(50);
+                saveState();
+                renderAll();
+            }
+        }
+
+        function renderAgenda() {
+            const container = document.getElementById('agenda-list-container');
+            container.innerHTML = State.agenda.map(a => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-brand-primary/10 text-brand-primary font-bold">${a.type}</span>
+                        <h4 class="text-white font-semibold mt-1">${a.title}</h4>
+                    </div>
+                    <span class="text-sm font-bold text-gray-300">${a.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderStudies() {
+            const container = document.getElementById('study-list-container');
+            container.innerHTML = State.studies.map(s => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <div>
+                        <h4 class="text-white font-semibold">${s.title}</h4>
+                        <span class="text-xs text-amber-400 font-medium">Prazo: ${s.deadline}</span>
+                    </div>
+                    <span class="text-xs px-3 py-1 rounded-full bg-dark-700 text-gray-300 font-semibold">${s.status}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderFinances() {
+            const container = document.getElementById('financial-list');
+            container.innerHTML = State.finances.map(f => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between">
+                    <span class="text-gray-200 font-medium">${f.title}</span>
+                    <span class="font-bold ${f.type === 'Entrada' ? 'text-emerald-400' : 'text-rose-400'}">${f.amount}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderWorkouts() {
+            const container = document.getElementById('workout-container');
+            container.innerHTML = State.workouts.map(w => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50">
+                    <span class="text-xs text-brand-primary font-bold">${w.day}</span>
+                    <h4 class="text-white font-bold mt-1 mb-2">${w.focus}</h4>
+                    <span class="text-xs text-gray-400">Status: ${w.status}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderWheel() {
+            const container = document.getElementById('wheel-container');
+            container.innerHTML = State.wheel.map(w => `
+                <div class="p-4 rounded-xl bg-dark-800/80 border border-gray-700/50">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-gray-200 font-semibold text-sm">${w.area}</span>
+                        <span class="text-brand-primary font-bold">${w.score} / 10</span>
+                    </div>
+                    <div class="w-full bg-dark-900 rounded-full h-2">
+                        <div class="bg-brand-primary h-2 rounded-full" style="width: ${w.score * 10}%;"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addXP(amount) {
+            State.xp += amount;
+            if (State.xp >= State.level * 500) {
+                State.level++;
+                alert(`Parabéns! Você evoluiu para o Nível ${State.level} como Executor Sênior!`);
+            }
+            saveState();
+            updateGamificationUI();
+        }
+
+        function updateGamificationUI() {
+            document.getElementById('user-level').innerText = State.level;
+            document.getElementById('user-xp').innerText = `${State.xp} / ${State.level * 500} XP`;
+            const pct = Math.min(100, (State.xp / (State.level * 500)) * 100);
+            document.getElementById('xp-bar').style.width = `${pct}%`;
+        }
+
+        // Funções de Interação e GTD
+        function addGtdItem() {
+            const input = document.getElementById('new-gtd-input');
+            if (!input.value.trim()) return;
+            const list = document.getElementById('gtd-inbox-list');
+            const div = document.createElement('div');
+            div.className = "p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm";
+            div.innerHTML = `<span class="text-gray-200">${input.value}</span><button class="text-xs text-brand-accent hover:underline font-semibold" onclick="this.parentElement.remove()">Processar</button>`;
+            list.prepend(div);
+            input.value = '';
+            addXP(20);
+        }
+
+        function requestNotificationPermission() {
+            if (!("Notification" in window)) {
+                alert("Este navegador não suporta notificações.");
+                return;
+            }
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    new Notification("Segundo Cérebro Ativo", { body: "Notificações ativadas com sucesso! Sua rotina será mantida rigorosamente." });
+                }
+            });
+        }
+
+        function triggerWheelCheckin() {
+            const score = prompt("De 0 a 10, como você avalia sua energia e foco nesta semana?", "8");
+            if (score !== null) {
+                alert("Check-in semanal registrado! Continue mantendo a frequência.");
+                addXP(100);
+            }
+        }
+
+        function addHabitPrompt() {
+            const title = prompt("Nome do novo hábito para sua rotina:");
+            if (title) {
+                State.habits.push({ id: Date.now(), title, done: false, time: '00:00' });
+                saveState();
+                renderAll();
+            }
+        }
+
+        function addEventModal() {
+            const title = prompt("Nome do evento/reunião:");
+            const time = prompt("Horário (ex: 15:00):", "14:00");
+            if (title) {
+                State.agenda.push({ id: Date.now(), title, time, type: 'Agenda' });
+                saveState();
+                renderAll();
+            }
+        }
+
+        function addStudyModal() {
+            const title = prompt("Título da atividade/prova na Unialfa:");
+            if (title) {
+                State.studies.push({ id: Date.now(), title, deadline: 'Próxima semana', status: 'Pendente' });
+                saveState();
+                renderAll();
+            }
+        }
+
+        function triggerDumpModal() {
+            const thought = prompt("Brain Dump Rápido: O que está ocupando sua mente agora?");
+            if (thought) {
+                addGtdItemExternal(thought);
+                addXP(30);
+                alert("Pensamento capturado e retirado do seu cérebro biológico!");
+            }
+        }
+
+        function addGtdItemExternal(text) {
+            const list = document.getElementById('gtd-inbox-list');
+            const div = document.createElement('div');
+            div.className = "p-3 rounded-xl bg-dark-800/80 border border-gray-700/50 flex items-center justify-between text-sm";
+            div.innerHTML = `<span class="text-gray-200">${text}</span><button class="text-xs text-brand-accent hover:underline font-semibold" onclick="this.parentElement.remove()">Processar</button>`;
+            list.prepend(div);
+        }
+
+        // Inicialização
+        window.onload = function() {
+            loadState();
+            renderAll();
+        };
+    </script>
+</body>
+</html>
